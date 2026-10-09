@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legacy Trust Bank - Customer Resolution Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Prototype Quick Links Banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="01-landing.html" style="font-weight:700;">Landing</a>
+        <a href="02-verify.html">Identity Verification</a>
+        <a href="03-account-summary.html">Account Summary</a>
+        <a href="04a-promise-to-pay.html">Promise to Pay</a>
+        <a href="04b-payment-plan.html">Payment Plans</a>
+        <a href="04d-card-payment.html">Card Settlement</a>
+        <a href="04c-book-appointment.html">Book Phone Call</a>
+        <a href="06b-dispute-hardship.html">Dispute / Hardship</a>
+        <a href="05-confirmation.html">Confirmation</a>
+        <a href="06-routed-representative.html">Specialist Routing</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports &amp; Reconciliation</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span style="color:#4ade80;">●</span>
+        <span>Secure 256-bit TLS Session &bull; PRA/FCA Regulated</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+    <!-- Live Operational Status Ticker -->
+    <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: var(--shadow-xs);">
+      <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: #334155;">
+        <span style="display: inline-block; width: 8px; height: 8px; background: #16a34a; border-radius: 50%;"></span>
+        <strong>Online Self-Service Portal Active:</strong> Over 12,000 customers resolved payment terms online this month.
+      </div>
+      <div style="font-size: 0.8rem; color: var(--color-text-muted);">
+        Priority Phone Queue: <strong>&lt; 2m wait</strong> &bull; Free Helpline: <strong>0800 456 7890</strong>
+      </div>
+    </div>
+
+    <!-- Session Expired Notice (Auto-displayed if timed out) -->
+    <div id="session-timeout-alert" style="display: none; background: #fffbeb; border: 1.5px solid #f59e0b; border-left-width: 6px; border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: #92400e;">
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <span style="font-size: 1.5rem;">⏱️</span>
+        <div>
+          <strong style="font-size: 1rem; display: block; color: #78350f;">Session Expired Due to Inactivity (1 Minute)</strong>
+          <span style="font-size: 0.88rem; color: #92400e;">
+            For your security and financial privacy, your previous portal session was automatically closed after 1 minute of inactivity. Please re-enter your reference number and postcode to start a new session.
+          </span>
+        </div>
+      </div>
+    </div>
+    <script>
+      if (window.location.search.includes('session=expired')) {
+        document.getElementById('session-timeout-alert').style.display = 'block';
+      }
+    </script>
+
+    <section class="card">
+      <div class="card-header">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h1 class="card-title">Resolve Your Overdue Account Online</h1>
+            <p class="card-subtitle">Fast, confidential, and flexible options to bring your account back into good standing without agent delay.</p>
+          </div>
+          <div class="security-seal">
+            <span>🛡️ Verified Banking Portal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="border-left-width: 4px; display: flex; gap: 0.85rem; align-items: flex-start;">
+        <div style="font-size: 1.25rem; line-height: 1;">ℹ️</div>
+        <div>
+          <strong>Notice of Arrears Assistance:</strong> If you received an SMS, email, or formal default letter regarding your loan or current account, you can review your balance, set an interest-frozen promise-to-pay, spread installments up to 12 months, or book an advisor callback.
+        </div>
+      </div>
+
+      <form action="02-verify.html" method="get">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+          <div class="form-group">
+            <label class="form-label" for="accountRef">Account or Notice Reference Number</label>
+            <input class="form-control" type="text" id="accountRef" name="accountRef" placeholder="e.g. LTB-8849-2104" value="LTB-8849-2104" required style="font-weight: 600; letter-spacing: 0.05em;">
+            <span class="form-hint">Shown in the top-right corner of your letter or inside your SMS notification.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="postcode">Billing Postcode</label>
+            <input class="form-control" type="text" id="postcode" name="postcode" placeholder="e.g. EC2A 4NE" value="EC2A 4NE" required style="font-weight: 600; text-transform: uppercase;">
+            <span class="form-hint">Matches your primary address on record with Legacy Trust Bank.</span>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top: 1.5rem;">
+          <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1.05rem;">
+            Verify Identity &amp; View Balance &rarr;
+          </button>
+          <a href="06-routed-representative.html?reason=manual-request" class="btn btn-outline">
+            I prefer to speak with a collections specialist
+          </a>
+        </div>
+      </form>
+    </section>
+
+    <!-- Context Cards -->
+    <section class="card" style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
+      <h2 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 800;">
+        Why use the Legacy Trust Bank Resolution Portal?
+      </h2>
+      <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+        Designed to give you control over your repayment options with immediate statutory protections.
+      </p>
+      <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 0;">
+        <div style="padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow-xs);">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+          <strong style="color: var(--color-primary); display: block; font-size: 1rem;">Immediate Hold on Fees</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.35rem;">Setting an active resolution halts automated dialer calls, debt letters, and late surcharges immediately.</p>
+        </div>
+        <div style="padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow-xs);">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤝</div>
+          <strong style="color: var(--color-primary); display: block; font-size: 1rem;">Up to 30 Days to Pay</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.35rem;">Commit to pay in full within 30 days to align with your next income payment or salary payday.</p>
+        </div>
+        <div style="padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow-xs);">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📅</div>
+          <strong style="color: var(--color-primary); display: block; font-size: 1rem;">Plans up to 12 Months</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.35rem;">Spread arrears into equal, interest-frozen monthly installments from 3 up to 12 months.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority.</p>
+      <div class="footer-links">
+        <a href="06-routed-representative.html?reason=vulnerability">Report Financial Difficulty</a>
+        <a href="06-routed-representative.html?reason=dispute">Dispute Account Balance</a>
+        <a href="06-routed-representative.html?reason=general">Contact Free Debt Advice</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

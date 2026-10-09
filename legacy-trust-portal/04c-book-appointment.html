@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Phone Consultation - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="03-account-summary.html">&larr; Back to Account Summary</a>
+        <a href="05-confirmation.html?type=appointment">Confirm Booking &rarr;</a>
+        <a href="10-unhappy-no-slots.html" style="color:#f87171;">Unhappy Path: Capacity Full &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span>📞 Channel: Telephone Consultation Only</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Book Phone Call</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title">Schedule a Phone Consultation</h1>
+        <p class="card-subtitle">Choose a convenient date and time for a specialist collections advisor to call you.</p>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Telephone Appointment Details:</strong> Our advisor will call you from a verified Legacy Trust Bank telephone number (<strong>0800 456 7890</strong>). The session lasts 20 minutes and will review your repayment options confidentially.
+      </div>
+
+      <form action="05-confirmation.html" method="get">
+        <input type="hidden" name="type" value="appointment">
+
+        <!-- Topic selection -->
+        <div class="form-group">
+          <label class="form-label" for="topic">Primary Discussion Topic</label>
+          <select class="form-control" id="topic" name="topic" required>
+            <option value="affordability">Affordability & Bespoke Long-term Plan</option>
+            <option value="vulnerability">Financial Hardship / Breathing Space Scheme</option>
+            <option value="dispute">Querying Balance / Disputing Late Fees</option>
+            <option value="general">General Account Arrears Guidance</option>
+          </select>
+        </div>
+
+        <!-- Phone confirmation -->
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number to Call You On</label>
+          <input class="form-control" type="tel" id="phone" name="phone" value="+44 7700 900492" required>
+          <span class="form-hint">Pre-filled with your registered mobile. You may update this for this consultation.</span>
+        </div>
+
+        <!-- Date picker -->
+        <div class="form-group">
+          <label class="form-label" for="callDate">Select Appointment Date</label>
+          <input class="form-control" type="date" id="callDate" name="callDate" min="2026-10-10" max="2026-10-24" value="2026-10-13" required>
+          <span class="form-hint">Appointments are available Monday to Friday, up to 14 days in advance.</span>
+        </div>
+
+        <!-- Time Slot Radio Selection -->
+        <div class="form-group">
+          <label class="form-label">Select Time Window</label>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 0.5rem;">
+            <label class="plan-radio-label" style="padding: 0.75rem;">
+              <input type="radio" name="timeSlot" value="09:30" checked>
+              <strong>09:30 - 09:50</strong>
+              <div style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Available</div>
+            </label>
+            <label class="plan-radio-label" style="padding: 0.75rem;">
+              <input type="radio" name="timeSlot" value="11:15">
+              <strong>11:15 - 11:35</strong>
+              <div style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Available</div>
+            </label>
+            <label class="plan-radio-label" style="padding: 0.75rem;">
+              <input type="radio" name="timeSlot" value="14:00">
+              <strong>14:00 - 14:20</strong>
+              <div style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Available</div>
+            </label>
+            <label class="plan-radio-label" style="padding: 0.75rem;">
+              <input type="radio" name="timeSlot" value="16:30">
+              <strong>16:30 - 16:50</strong>
+              <div style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Available</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="notes">Additional Information for the Advisor (Optional)</label>
+          <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Briefly describe any specific circumstances (e.g. recent redundancy, awaiting universal credit)..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Confirm Telephone Booking &rarr;</button>
+          <a href="10-unhappy-no-slots.html" class="btn btn-outline" style="color: var(--color-warning); border-color: #fde68a;">
+            Simulate Unhappy Path: No Available Slots on Date
+          </a>
+          <a href="03-account-summary.html" class="btn btn-link">Cancel and Return</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Specialist Telephone Support Services.</p>
+    </div>
+  </footer>
+
+  <!-- 1-Minute Inactivity Session Manager -->
+  <script src="session-timer.js"></script>
+</body>
+</html>

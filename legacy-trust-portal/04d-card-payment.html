@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immediate Card Payment - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="03-account-summary.html">&larr; Back to Account Summary</a>
+        <a href="05-confirmation.html?type=card-payment">Authorise Settlement &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span>🔒 Step 3 of 4: PCI DSS Level 1 Certified Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Card Checkout</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title">Instant Card Settlement</h1>
+        <p class="card-subtitle">Pay your overdue arrears balance in full to immediately restore your account to good standing.</p>
+      </div>
+
+      <!-- Payment Summary & Interactive Bank Card Visualization -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; align-items: center; margin-bottom: 1.5rem;">
+        <div class="stat-box" style="margin-bottom: 0;">
+          <div>
+            <div class="stat-label">Total Payment Clearance Amount</div>
+            <div class="stat-amount" style="font-size: 2.2rem; color: var(--color-accent);">£1,240.00</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+              Account: <strong>LTB-8849-2104</strong> &bull; Settle in Full (Cycle 2 Arrears)
+            </div>
+          </div>
+        </div>
+
+        <!-- Realistic Bank Card Preview -->
+        <div class="bank-card-mock">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <strong style="font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Legacy Trust Bank</strong>
+            <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 0.2rem 0.5rem; border-radius: 4px;">DEBIT</span>
+          </div>
+          <div class="card-chip"></div>
+          <div class="card-number-display">4532 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4012</div>
+          <div class="card-meta-row">
+            <div>
+              <div style="font-size: 0.65rem; color: #cbd5e1; text-transform: uppercase;">Cardholder</div>
+              <div class="card-holder-name">SARAH M JENKINS</div>
+            </div>
+            <div>
+              <div style="font-size: 0.65rem; color: #cbd5e1; text-transform: uppercase;">Expires</div>
+              <div style="font-family: monospace; font-weight: 700;">09/28</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulated PCI iFrame Container -->
+      <div class="pci-iframe-mock">
+        <div class="pci-watermark">
+          <span>🔒 Certified PCI DSS Level 1 Gateway</span>
+        </div>
+
+        <h3 style="font-size: 1.05rem; color: var(--color-primary); margin-bottom: 1rem;">
+          Cardholder Payment Details
+        </h3>
+
+        <form id="ltb-payment-form" action="05-confirmation.html" method="get">
+          <input type="hidden" name="type" value="card-payment">
+
+          <div class="form-group">
+            <label class="form-label" for="cardholderName">Name on Card</label>
+            <input class="form-control" type="text" id="cardholderName" name="cardholderName" value="SARAH M JENKINS" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cardNumber">Card Number</label>
+            <input class="form-control" type="text" id="cardNumber" name="cardNumber" placeholder="•••• •••• •••• 4012" value="4532 8901 2345 4012" maxlength="19" required style="letter-spacing: 0.15em; font-family: monospace; font-size: 1.1rem;">
+            <span class="form-hint">Accepted cards: Visa, Mastercard, Maestro, American Express.</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="expiry">Expiry Date</label>
+              <input class="form-control" type="text" id="expiry" name="expiry" placeholder="MM / YY" value="09 / 28" maxlength="5" required style="letter-spacing: 0.1em; font-family: monospace;">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cvv">Security Code (CVV)</label>
+              <input class="form-control" type="password" id="cvv" name="cvv" placeholder="•••" value="842" maxlength="4" required style="letter-spacing: 0.2em; font-family: monospace;">
+            </div>
+          </div>
+
+          <div class="form-group" style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem; margin-top: 0.5rem;">
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">
+              <strong>PCI-DSS Compliance Notice:</strong> Legacy Trust Bank web servers never process, store, or transmit your full card numbers. Card data is tokenized directly within the certified payment gateway vault.
+            </span>
+          </div>
+
+          <div class="btn-group">
+            <button id="ltb-pay-submit-btn" type="submit" class="btn btn-accent" style="padding: 0.9rem 2rem;">
+              Authorise &amp; Pay £1,240.00 Now &rarr;
+            </button>
+            <a href="03-account-summary.html" class="btn btn-outline">Cancel and Return</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. PCI DSS Level 1 Certified Payment Processing.</p>
+    </div>
+  </footer>
+
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
+  <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const state = window.LTBLedger.getState();
+      const form = document.getElementById('ltb-payment-form');
+      const submitBtn = document.getElementById('ltb-pay-submit-btn');
+
+      if (state.isPaid || state.arrearsBalance <= 0) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.textContent = 'Account Already Paid in Full (£0.00)';
+        const alertBox = document.createElement('div');
+        alertBox.className = 'alert alert-success';
+        alertBox.style.marginTop = '1rem';
+        alertBox.innerHTML = '<strong>Account Up to Date:</strong> Your overdue arrears balance is currently £0.00. No further payment is required.';
+        form.parentNode.insertBefore(alertBox, form);
+      } else {
+        form.addEventListener('submit', function (e) {
+          // Commit the payment to localStorage
+          window.LTBLedger.pay(state.arrearsBalance, 'Debit Card (•••• 4012)');
+          // Allow navigation to 05-confirmation.html
+        });
+      }
+    });
+  </script>
+</body>
+</html>

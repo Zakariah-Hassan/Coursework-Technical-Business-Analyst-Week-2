@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise to Pay Date Ineligible - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Unhappy Path 2: PTP Date Exceeds Maximum 30-Day Policy Horizon:</strong>
+      <div class="demo-links">
+        <a href="04a-promise-to-pay.html">&larr; Return to Promise-to-Pay Form</a>
+        <a href="04b-payment-plan.html">Route to Payment Plan &rarr;</a>
+        <a href="04c-book-appointment.html">Route to Advisor Booking &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge" style="background: rgba(239, 68, 68, 0.25);">
+        <span>⚠️ Date Ineligible Under Policy</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title" style="color: var(--color-danger);">Requested Payment Date Cannot Be Accepted Online</h1>
+        <p class="card-subtitle">Your selected date falls beyond our digital self-service policy threshold of 30 calendar days.</p>
+      </div>
+
+      <div class="alert alert-danger">
+        <strong>Policy Threshold Exceeded:</strong> You requested a payment date of <strong>25 November 2026</strong> (47 days). Under Legacy Trust Bank recovery policy rules, self-service Promises-to-Pay are restricted to a maximum horizon of <strong>30 calendar days</strong> (Latest permitted date: <strong>08 November 2026</strong>).
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.75rem;">What would you like to do instead?</h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+          If you are unable to pay in full within 30 days, you have two approved alternatives that prevent collection enforcement:
+        </p>
+        
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+          <a href="04b-payment-plan.html" class="option-card" style="border-color: #2563eb;">
+            <span class="option-badge">Recommended</span>
+            <div class="option-title">Spread into a Payment Plan</div>
+            <div class="option-desc">Split your balance across 3 to 12 months with lower monthly payments that fit your timeline.</div>
+            <div style="margin-top: 0.75rem; font-weight: 600; color: #2563eb;">Choose Payment Plan &rarr;</div>
+          </a>
+
+          <a href="04c-book-appointment.html" class="option-card">
+            <span class="option-badge" style="background: #f1f5f9; color: #475569;">Human Review</span>
+            <div class="option-title">Request Discretionary Extension</div>
+            <div class="option-desc">Speak to a specialist collections officer who may authorize extended grace periods based on your circumstances.</div>
+            <div style="margin-top: 0.75rem; font-weight: 600; color: #2563eb;">Book Phone Consultation &rarr;</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <a href="04a-promise-to-pay.html" class="btn btn-outline">&larr; Revise Date to Within 30 Days</a>
+        <a href="03-account-summary.html" class="btn btn-link">Return to Account Summary</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Arrears and Credit Management Operations.</p>
+    </div>
+  </footer>
+
+  <!-- 1-Minute Inactivity Session Manager -->
+  <script src="session-timer.js"></script>
+</body>
+</html>

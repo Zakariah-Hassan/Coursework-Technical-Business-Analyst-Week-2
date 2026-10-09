@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Appointment Slots Available - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Unhappy Path 4: Advisor Capacity Reached &rarr; Callback Queueing:</strong>
+      <div class="demo-links">
+        <a href="04c-book-appointment.html">&larr; Return to Slot Selection</a>
+        <a href="06-routed-representative.html?reason=no-slots">Route to Representative Queue &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge" style="background: rgba(194, 97, 0, 0.25);">
+        <span>⚠️ High Call Volume Alert</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title" style="color: var(--color-warning);">No Immediate Phone Slots Available on Selected Date</h1>
+        <p class="card-subtitle">All scheduled appointment slots for 13 October 2026 have reached maximum booking capacity.</p>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>Automatic Protection:</strong> Don't worry—because you attempted to resolve your account today, an automated <strong>7-day grace hold</strong> has been applied to your account <strong>LTB-8849-2104</strong> to prevent any additional late charges.
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; color: var(--color-primary); margin-bottom: 0.75rem;">Alternative Contact Options:</h3>
+
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+          <!-- Fallback 1: Asynchronous Priority Callback -->
+          <a href="05-confirmation.html?type=callback-queued" class="option-card" style="border-color: #2563eb;">
+            <span class="option-badge">Recommended</span>
+            <div class="option-title">Queue an Asynchronous Callback</div>
+            <div class="option-desc">Leave your phone number in our priority dispatch queue. An advisor will telephone you within <strong>2 business hours</strong> today.</div>
+            <div style="margin-top: 0.75rem; font-weight: 600; color: #2563eb;">Queue Callback Now &rarr;</div>
+          </a>
+
+          <!-- Fallback 2: Select alternative date -->
+          <a href="04c-book-appointment.html" class="option-card">
+            <span class="option-badge" style="background: #f1f5f9; color: #475569;">Calendar View</span>
+            <div class="option-title">Select an Alternative Date</div>
+            <div class="option-desc">View availability for 14, 15, or 16 October 2026 where morning and afternoon slots remain open.</div>
+            <div style="margin-top: 0.75rem; font-weight: 600; color: #2563eb;">Pick New Date &rarr;</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <a href="06-routed-representative.html?reason=call-now" class="btn btn-primary">Call Direct Telephone Line (Wait ~3m) &rarr;</a>
+        <a href="03-account-summary.html" class="btn btn-outline">Return to Account Summary</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Customer Capacity & Operations Management.</p>
+    </div>
+  </footer>
+
+  <!-- 1-Minute Inactivity Session Manager -->
+  <script src="session-timer.js"></script>
+</body>
+</html>

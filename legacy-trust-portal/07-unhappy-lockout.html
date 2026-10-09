@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Hold - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Unhappy Path 1: Security Hold Placed:</strong>
+      <div class="demo-links">
+        <a href="02-verify.html">&larr; Return to Verification Screen</a>
+        <a href="01-landing.html">Start Over</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge" style="background: rgba(239, 68, 68, 0.25);">
+        <span>⚠️ Security Lockdown</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title" style="color: var(--color-danger);">Verification Unsuccessful: Security Hold Placed</h1>
+        <p class="card-subtitle">For your security, online access for this account has been temporarily paused after 3 unsuccessful attempts.</p>
+      </div>
+
+      <div class="alert alert-danger">
+        <strong>Security Alert:</strong> You have exceeded the maximum allowed verification attempts for reference <strong>LTB-8849-2104</strong>. For your protection, an automated security hold has been placed on your account and assigned to our Customer Security Representative Team.
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.75rem;">Next Steps to Restore Access:</h3>
+        <ol style="margin-left: 1.5rem; line-height: 1.8; color: var(--color-text);">
+          <li>Please call our dedicated Telephone Banking Security Desk directly.</li>
+          <li>Quote your incident authorization pin: <strong style="color: #b91c1c; font-size: 1.2rem; letter-spacing: 0.1em; background: #fee2e2; padding: 0.2rem 0.5rem; border-radius: 4px;">SEC-992-FAIL</strong>.</li>
+          <li>A representative will verify your identity via secondary security questions and unlock your online portal access.</li>
+        </ol>
+      </div>
+
+      <div class="stat-box" style="justify-content: flex-start; gap: 2rem;">
+        <div>
+          <div class="stat-label">Priority Telephone Helpline</div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">0800 456 7890</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted);">Mon-Fri: 8am - 8pm | Sat: 9am - 4pm</div>
+        </div>
+        <div style="border-left: 1px solid var(--color-border); padding-left: 2rem;">
+          <div class="stat-label">Current Phone Wait Time</div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent);">&lt; 3 minutes</div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <a href="04c-book-appointment.html" class="btn btn-primary">Book Scheduled Phone Callback Instead &rarr;</a>
+        <a href="01-landing.html" class="btn btn-outline">Return to Homepage</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Fraud Prevention & Account Security Operations.</p>
+    </div>
+  </footer>
+
+  <!-- 1-Minute Inactivity Session Manager -->
+  <script src="session-timer.js"></script>
+</body>
+</html>

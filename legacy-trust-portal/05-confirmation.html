@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation & Next Steps - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="01-landing.html">Return to Portal Home</a>
+        <a href="03-account-summary.html">Return to Account Overview</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace &rarr;</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge" style="background: rgba(16, 185, 129, 0.25);">
+        <span>✓ Step 4 of 4: Arrangement Active</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Select Solution</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 64px; height: 64px; background: #dcfce7; color: var(--color-accent); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+          ✓
+        </div>
+        <h1 class="card-title" style="color: var(--color-accent);">Your Arrangement is Confirmed</h1>
+        <p class="card-subtitle">Your repayment agreement has been verified and committed to the core database.</p>
+      </div>
+
+      <!-- Reference summary box -->
+      <div style="background: #f8fafc; border: 1.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.75rem; margin-bottom: 2rem; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #10b981 0%, #059669 100%);"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 1.25rem; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-muted); font-weight: 700; letter-spacing: 0.05em;">Official Confirmation Reference</span>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); letter-spacing: 0.05em;">#LTB-CONF-884920</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="security-seal">
+              <span>🔒 Legally Binding Agreement</span>
+            </div>
+            <span style="background: #dcfce7; color: #166534; font-size: 0.85rem; font-weight: 700; padding: 0.4rem 0.85rem; border-radius: 999px;">
+              ● Status: Active &amp; Protected
+            </span>
+          </div>
+        </div>
+
+        <ul style="list-style: none; padding-left: 0; line-height: 2.1; font-size: 0.95rem;">
+          <li style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Account Holder:</span>
+            <strong>Sarah M. Jenkins</strong>
+          </li>
+          <li style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Account Reference:</span>
+            <strong>LTB-8849-2104</strong>
+          </li>
+          <li style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Arrangement Type:</span>
+            <strong style="color: #0369a1;" id="conf-arrangement-type">Agreed Digital Self-Service Resolution</strong>
+          </li>
+          <li style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Customer Notifications Dispatched:</span>
+            <strong style="color: var(--color-accent);">✓ SMS sent to •••• 4921 &bull; ✓ Email sent to s***@outlook.com</strong>
+          </li>
+          <li style="display: flex; justify-content: space-between;">
+            <span style="color: var(--color-text-muted);">Core Ledger Verification Hash:</span>
+            <code style="font-size: 0.8rem; background: #e2e8f0; padding: 0.15rem 0.5rem; border-radius: 4px; font-family: monospace;">sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1f</code>
+          </li>
+          <li style="display: flex; justify-content: space-between; border-top: 1px dashed var(--color-border); padding-top: 0.75rem; margin-top: 0.75rem;">
+            <span style="color: var(--color-text-muted); font-weight: 600;">Amount Settled Today:</span>
+            <strong style="color: var(--color-accent); font-size: 1.25rem;" id="conf-amount-paid">£1,240.00</strong>
+          </li>
+          <li style="display: flex; justify-content: space-between;" id="conf-balance-row">
+            <span style="color: var(--color-text-muted); font-weight: 600;">Remaining Arrears Balance:</span>
+            <strong style="color: var(--color-primary); font-size: 1.15rem;" id="conf-remaining-balance">£0.00 (Cleared)</strong>
+          </li>
+        </ul>
+      </div>
+
+      <!-- What happens next timeline -->
+      <h3 style="font-size: 1.15rem; color: var(--color-primary); margin-bottom: 1rem;">What happens next?</h3>
+      <div style="border-left: 2px solid #2563eb; padding-left: 1.25rem; margin-left: 0.5rem; margin-bottom: 2rem;">
+        <div style="margin-bottom: 1.25rem; position: relative;">
+          <div style="position: absolute; left: -1.75rem; top: 0; width: 12px; height: 12px; background: #2563eb; border-radius: 50%;"></div>
+          <strong>1. Written confirmation dispatched immediately</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted);">A full copy of this agreement and payment receipt has been sent to your registered email (s***@outlook.com) and via SMS.</p>
+        </div>
+        <div style="margin-bottom: 1.25rem; position: relative;">
+          <div style="position: absolute; left: -1.75rem; top: 0; width: 12px; height: 12px; background: #2563eb; border-radius: 50%;"></div>
+          <strong>2. Late fees &amp; collection calls paused permanently</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted);">Your account status in our core database has been committed to good standing. Late fees are frozen.</p>
+        </div>
+        <div style="position: relative;">
+          <div style="position: absolute; left: -1.75rem; top: 0; width: 12px; height: 12px; background: #2563eb; border-radius: 50%;"></div>
+          <strong>3. Real-time status synced to bank ledger</strong>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted);">Credit reporting bureaus and internal collections systems will receive notification within 24 hours.</p>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <a href="01-landing.html" class="btn btn-primary">Done &amp; Exit Securely</a>
+        <a href="03-account-summary.html" class="btn btn-outline">View Updated Account Balance</a>
+        <a href="#" class="btn btn-outline" onclick="window.print(); return false;">Print / Save Summary (PDF)</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Customer Resolution Audit Trail #LTB-CONF-884920.</p>
+    </div>
+  </footer>
+
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
+  <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const state = window.LTBLedger.getState();
+      const isCardPayment = window.location.search.includes('type=card-payment') || state.isPaid;
+
+      if (isCardPayment) {
+        document.getElementById('conf-arrangement-type').textContent = 'Direct Card Settlement (Paid in Full)';
+        document.getElementById('conf-amount-paid').textContent = '£1,240.00';
+        document.getElementById('conf-remaining-balance').textContent = '£0.00 (Cleared)';
+      }
+    });
+  </script>
+</body>
+</html>

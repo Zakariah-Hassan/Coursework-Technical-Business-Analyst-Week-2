@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise to Pay (PTP) - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="03-account-summary.html">&larr; Back to Account Summary</a>
+        <a href="05-confirmation.html?type=ptp">Commitment Confirmed &rarr;</a>
+        <a href="08-unhappy-ptp-rejected.html" style="color:#f87171;">Unhappy Path: Date Ineligible &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span>🔒 Step 3 of 4: Future-Dated Promise-to-Pay</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Promise-to-Pay</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card" id="ptp-card-section">
+      <div id="ptp-zero-banner" style="display: none; background: #ecfdf3; border: 1.5px solid #a7f3d0; border-left-width: 6px; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+        <strong style="color: #065f46; font-size: 1.05rem; display: block;">No Promise to Pay Needed - Balance is £0.00</strong>
+        <p style="font-size: 0.9rem; color: #027a48; margin-top: 0.25rem;">
+          Your account is fully paid and in good standing. You do not need to schedule a promise-to-pay.
+        </p>
+        <div style="margin-top: 0.75rem;">
+          <a href="03-account-summary.html" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">
+            &larr; Return to Account Summary
+          </a>
+        </div>
+      </div>
+
+      <div class="card-header">
+        <h1 class="card-title">Schedule a Future-Dated Promise to Pay (PTP)</h1>
+        <p class="card-subtitle">Commit to settling your overdue balance in full on an agreed date within the 30-day policy window.</p>
+      </div>
+
+      <!-- Current Arrears Recall -->
+      <div class="stat-box" style="margin-bottom: 1.5rem;">
+        <div>
+          <div class="stat-label">Arrears Balance to be Settled</div>
+          <div class="stat-amount" style="font-size: 1.8rem; color: var(--color-primary);">£1,240.00</div>
+        </div>
+        <div style="font-size: 0.9rem; color: var(--color-text-muted); text-align: right;">
+          Policy Horizon: <strong>Maximum 30 days</strong><br>
+          Latest Permitted Date: <strong>08 November 2026</strong>
+        </div>
+      </div>
+
+      <form action="05-confirmation.html" method="get">
+        <input type="hidden" name="type" value="ptp">
+        
+        <div class="form-group">
+          <label class="form-label" for="ptpDate">Select Your Promised Payment Date</label>
+          <input class="form-control" type="date" id="ptpDate" name="ptpDate" min="2026-10-09" max="2026-11-08" value="2026-10-30" required>
+          <span class="form-hint">Must be between today and 08 November 2026 (up to 30 calendar days).</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Intended Payment Channel</label>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="paymentChannel" value="card" checked>
+              <span>Debit Card (via secure online link sent on payment date)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="paymentChannel" value="openbanking">
+              <span>Open Banking / Instant Bank Transfer</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="radio" name="paymentChannel" value="branch">
+              <span>Pay over telephone banking</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" name="ptpDeclaration" required style="margin-top: 0.25rem;">
+            <span style="font-size: 0.9rem; color: var(--color-text);">
+              <strong>Legal Commitment Declaration:</strong> I confirm that I intend to pay the full arrears of £1,240.00 on or before the selected date. I understand that failing to make this payment will cancel the collection hold and may result in formal recovery escalation and adverse credit bureau reporting.
+            </span>
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-submit-ptp" type="submit" class="btn btn-accent">Submit Digital Promise to Pay &rarr;</button>
+          <a href="08-unhappy-ptp-rejected.html" class="btn btn-outline" style="color: var(--color-danger); border-color: #fca5a5;">
+            Simulate Unhappy Path: Date Exceeds 30-Day Window
+          </a>
+          <a href="03-account-summary.html" class="btn btn-link">Cancel and Choose Different Option</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Customer Resolution &amp; Collections Policy.</p>
+    </div>
+  </footer>
+
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
+  <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const state = window.LTBLedger.getState();
+      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+
+      if (isPaid) {
+        document.getElementById('ptp-zero-banner').style.display = 'block';
+        const submitBtn = document.getElementById('btn-submit-ptp');
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        submitBtn.style.cursor = 'not-allowed';
+        submitBtn.textContent = '✕ Commitment Disabled (Balance £0.00)';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Plan Options - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="03-account-summary.html">&larr; Back to Account Summary</a>
+        <a href="05-confirmation.html?type=plan">Confirm Plan &rarr;</a>
+        <a href="09-unhappy-plan-ineligible.html" style="color:#fde047;">Unhappy Path: Plans Unaffordable &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span>🔒 Step 3 of 4: Select Payment Schedule</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Payment Plan</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card" id="plan-section-card">
+      <div id="plan-ineligible-zero-banner" style="display: none; background: #fff5f5; border: 1.5px solid #fecaca; border-left-width: 6px; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <span style="font-size: 1.5rem; line-height: 1;">⚠️</span>
+          <div>
+            <strong style="color: #991b1b; font-size: 1.05rem; display: block;">Payment Plans Unavailable - Arrears Balance is £0.00</strong>
+            <p style="font-size: 0.9rem; color: #b42318; margin-top: 0.25rem;">
+              Your account has already been paid in full and has no outstanding arrears to spread into installments. Payment plans can only be created for delinquent accounts with past-due balances.
+            </p>
+            <div style="margin-top: 0.75rem;">
+              <a href="03-account-summary.html" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-color: #f87171; color: #991b1b;">
+                &larr; Return to Account Summary
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-header">
+        <h1 class="card-title">Choose an Affordable Payment Plan</h1>
+        <p class="card-subtitle" id="plan-header-subtitle">Spread your overdue balance of <strong>£1,240.00</strong> into manageable monthly installments (up to 12 months).</p>
+      </div>
+
+      <div class="alert alert-success" id="plan-freeze-alert">
+        <strong>Interest &amp; Fees Paused:</strong> By choosing an approved payment plan today, standard arrears interest and late charges will remain frozen for the duration of your active schedule.
+      </div>
+
+      <form id="plan-selection-form" action="05-confirmation.html" method="get">
+        <input type="hidden" name="type" value="plan">
+
+        <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem;">Select Plan Duration:</h3>
+        
+        <div class="plan-radio-group">
+          <!-- 3 Month Plan -->
+          <label class="plan-radio-label">
+            <input type="radio" class="plan-radio-input" name="planDuration" value="3m">
+            <div class="plan-radio-content">
+              <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">3 Months</strong>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-accent); margin: 0.25rem 0;">£413.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Shortest term &bull; Fast clearance &bull; Total £1,240.00</p>
+            </div>
+          </label>
+
+          <!-- 6 Month Plan -->
+          <label class="plan-radio-label" style="border-color: #2563eb; background: #f0f7ff;">
+            <input type="radio" class="plan-radio-input" name="planDuration" value="6m" checked>
+            <div class="plan-radio-content">
+              <span class="option-badge" style="font-size: 0.7rem;">Most Selected</span>
+              <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">6 Months</strong>
+              <div style="font-size: 1.6rem; font-weight: 800; color: #2563eb; margin: 0.25rem 0;">£206.67<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Balanced monthly amount &bull; Total £1,240.00</p>
+            </div>
+          </label>
+
+          <!-- 9 Month Plan -->
+          <label class="plan-radio-label">
+            <input type="radio" class="plan-radio-input" name="planDuration" value="9m">
+            <div class="plan-radio-content">
+              <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">9 Months</strong>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£137.78<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Lower monthly impact &bull; Total £1,240.00</p>
+            </div>
+          </label>
+
+          <!-- 12 Month Plan -->
+          <label class="plan-radio-label">
+            <input type="radio" class="plan-radio-input" name="planDuration" value="12m">
+            <div class="plan-radio-content">
+              <span class="option-badge" style="background:#fef3c7; color:#92400e; font-size: 0.7rem;">Maximum Term</span>
+              <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">12 Months</strong>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£103.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Lowest monthly payment &bull; Total £1,240.00</p>
+            </div>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="firstPaymentDate">Preferred First Payment Date</label>
+          <input class="form-control" type="date" id="firstPaymentDate" name="firstPaymentDate" min="2026-10-15" max="2026-11-15" value="2026-10-28" required>
+          <span class="form-hint">Subsequent installments will be collected on this day each calendar month via Direct Debit.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Payment Method</label>
+          <select class="form-control" name="paymentType">
+            <option value="directdebit">Direct Debit from Current Account (•••• 6012)</option>
+            <option value="standingorder">Standing Order / Manual Bank Transfer</option>
+            <option value="card">Continuous Recurring Card Payment</option>
+          </select>
+        </div>
+
+        <!-- Exception Path Card Callout -->
+        <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <strong style="color: #92400e; font-size: 0.95rem;">Cannot afford the minimum £103.33/month?</strong>
+            <p style="font-size: 0.85rem; color: #78350f; margin-top: 0.2rem;">
+              Under the Standards of Lending Practice, you should never commit to an unaffordable plan. If your budget requires smaller payments or a temporary hold, our specialist team can help.
+            </p>
+          </div>
+          <a href="09-unhappy-plan-ineligible.html" class="btn btn-outline" style="border-color: #f59e0b; color: #b45309; font-weight: 700; white-space: nowrap; font-size: 0.85rem;">
+            Request Bespoke Affordability Review &rarr;
+          </a>
+        </div>
+
+        <div class="form-group" style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" name="planDeclaration" required style="margin-top: 0.25rem;">
+            <span style="font-size: 0.9rem; color: var(--color-text);">
+              <strong>Payment Agreement Confirmation:</strong> I agree to make monthly payments according to the selected schedule until the arrears balance is cleared in full. I confirm that this monthly installment is affordable based on my household budget.
+            </span>
+          </label>
+        </div>
+
+        <div class="btn-group" style="flex-direction: column; align-items: stretch; gap: 0.75rem;">
+          <button id="btn-submit-plan" type="submit" class="btn btn-accent" style="justify-content: center; font-size: 1.05rem; padding: 0.85rem;">
+            Accept &amp; Set Up Payment Plan (Happy Path) &rarr;
+          </button>
+          <a href="09-unhappy-plan-ineligible.html" class="btn btn-outline" style="border-color: #fde68a; color: #92400e; justify-content: center;">
+            ⚠️ Exception Path: Customer Ineligible for Standard Plans (Affordability Deficit) &rarr;
+          </a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Lending Code &amp; Arrears Standards.</p>
+    </div>
+  </footer>
+
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
+  <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const state = window.LTBLedger.getState();
+      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+
+      if (isPaid) {
+        document.getElementById('plan-ineligible-zero-banner').style.display = 'block';
+        document.getElementById('plan-freeze-alert').style.display = 'none';
+        document.getElementById('plan-header-subtitle').innerHTML = 'Overdue arrears balance is <strong style="color:#027a48;">£0.00</strong> (Paid in Full).';
+
+        const form = document.getElementById('plan-selection-form');
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(el => el.disabled = true);
+
+        const submitBtn = document.getElementById('btn-submit-plan');
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        submitBtn.style.cursor = 'not-allowed';
+        submitBtn.textContent = '✕ Payment Plans Disabled (Arrears Balance is £0.00)';
+      }
+    });
+  </script>
+</body>
+</html>

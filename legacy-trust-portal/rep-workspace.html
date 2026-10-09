@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Representative Collections Workspace - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background: #eceff3;">
+  <!-- Prototype Nav Banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Operations Workspace:</strong>
+      <div class="demo-links">
+        <a href="01-landing.html">&larr; Return to Customer Portal</a>
+        <a href="03-account-summary.html">Customer Account Summary</a>
+        <a href="06b-dispute-hardship.html">Dispute / Hardship Intake Form</a>
+        <a href="rep-workspace.html" style="font-weight:700; color:#fff;">[Active: Rep Workspace]</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports &amp; Reconciliation</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Internal Application Header -->
+  <header class="header" style="background: #0f172a; border-bottom: 2px solid #2563eb;">
+    <div class="header-container">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="brand-icon" style="background: #2563eb;">LTB</div>
+        <div>
+          <strong style="color: #ffffff; font-size: 1.1rem; display: block;">Legacy Collections CRM &amp; Resolution Workspace</strong>
+          <span style="font-size: 0.75rem; color: #94a3b8;">Agent ID: AGENT-4402 (Frontline Resolution Officer) &bull; Queue: Primary Collections Triage</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <span class="badge-flag" style="background: #1e293b; color: #38bdf8; border: 1px solid #0284c7;">
+          ● Core DB API: Connected
+        </span>
+        <span class="badge-flag" style="background: #1e293b; color: #4ade80; border: 1px solid #16a34a;">
+          ● Ledger Flag Sync: Live
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper" style="max-width: 1140px;">
+    <!-- Interactive Demo Ledger Toolbar -->
+    <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: var(--shadow-xs);">
+      <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: #334155;">
+        <span style="display: inline-block; width: 8px; height: 8px; background: #2563eb; border-radius: 50%;"></span>
+        <span>Customer Account Ledger: <strong>LTB-8849-2104</strong> &bull; Balance: <strong id="rep-toolbar-balance" style="color: var(--color-danger);">£1,240.00</strong></span>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button id="rep-btn-simulate-pay" type="button" class="btn btn-accent" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+          💳 Simulate Payment (£1,240.00 &rarr; £0.00)
+        </button>
+        <button id="rep-btn-simulate-hardship" type="button" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; border-color: #f59e0b; color: #b45309;">
+          ⚠️ Log Hardship Intake
+        </button>
+        <button id="rep-btn-simulate-dispute" type="button" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; border-color: #f87171; color: #b91c1c;">
+          ⚖️ Log Balance Dispute
+        </button>
+        <button id="rep-btn-reset-ledger" type="button" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
+          🔄 Reset Demo Ledger
+        </button>
+      </div>
+    </div>
+
+    <div class="rep-layout">
+      <!-- Left Sidebar: Account Search & Real-Time Flags -->
+      <aside class="rep-sidebar">
+        <div>
+          <label class="form-label" style="font-size: 0.85rem; text-transform: uppercase;">Search Core Ledger</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input class="form-control" type="text" value="LTB-8849-2104" style="font-size: 0.9rem; padding: 0.5rem;">
+            <button class="btn btn-primary" style="padding: 0.5rem 0.75rem; font-size: 0.85rem;">Find</button>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;">
+          <h3 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.75rem;">Account Snapshot</h3>
+          <div style="font-size: 0.85rem; line-height: 1.8;">
+            <div><strong>Borrower:</strong> Sarah M. Jenkins</div>
+            <div><strong>DOB:</strong> 14/06/1985 (Verified ✓)</div>
+            <div><strong>Product:</strong> Unsecured Personal Loan</div>
+            <div><strong>Total Principal:</strong> £5,400.00</div>
+            <div><strong>Arrears Balance:</strong> <span id="rep-sidebar-arrears" style="color: var(--color-danger); font-weight: 700;">£1,240.00</span></div>
+            <div><strong>Days Overdue:</strong> <span id="rep-sidebar-overdue">34 Days (Cycle 2)</span></div>
+          </div>
+        </div>
+
+        <!-- Real-Time Synchronized Status Flags -->
+        <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;">
+          <h3 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.75rem;">Core DB Status Flags</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>self_service_eligible</code>:</span>
+              <span class="badge-flag flag-active">TRUE (1)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>ptp_active</code>:</span>
+              <span class="badge-flag flag-active" id="rep-flag-ptp">TRUE (30d active)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>payment_received</code>:</span>
+              <span class="badge-flag" id="rep-flag-paid" style="background:#e2e8f0; color:#475569;">FALSE (£0.00)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>settled_in_full</code>:</span>
+              <span class="badge-flag" id="rep-flag-settled" style="background:#e2e8f0; color:#475569;">FALSE (0)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>outreach_suppression</code>:</span>
+              <span class="badge-flag flag-suppressed" id="rep-flag-suppress">TRUE (Suppressed)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>hardship_flag</code>:</span>
+              <span class="badge-flag flag-pending" id="rep-flag-hardship">ACTIVE (30d Hold)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>dispute_flag</code>:</span>
+              <span class="badge-flag flag-pending" id="rep-flag-dispute">REVIEW PENDING</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+              <span><code>legal_flag</code>:</span>
+              <span class="badge-flag" style="background:#e2e8f0; color:#475569;">FALSE (0)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supervisor Escalation Trigger -->
+        <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;">
+          <h3 style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-text-muted);">SLA Status</h3>
+          <div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 4px; padding: 0.5rem; font-size: 0.8rem; margin-top: 0.4rem;">
+            <strong style="color: #92400e;">⚠️ Boundary SLA: Amber</strong>
+            <p style="margin-top: 0.2rem; color: #78350f;">Callback window expires in 42 minutes. Unhandled tasks turn Red &amp; escalate to Team Lead.</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main: Interaction History & Outreach Logs -->
+      <section class="rep-content">
+        <!-- Live Customer Context Card -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h2 style="font-size: 1.25rem; color: var(--color-primary); margin-bottom: 0.25rem;">Active Customer Context: Sarah M. Jenkins</h2>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">Last customer portal activity: <strong>Today at 10:42 UTC</strong> &bull; IP: 194.73.102.14 &bull; Channel: Self-Service Mobile Web</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <a href="06-routed-representative.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">View Customer Handoff</a>
+              <button class="btn btn-primary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;" onclick="alert('Manual phone call initiated to +44 7700 900492.'); return false;">Initiate Outbound Call</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recorded Customer Payments Card -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid var(--color-accent);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; color: var(--color-primary);">
+                Recorded Customer Payments &amp; Settlement Receipts
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+                Live transaction history capturing self-service payments, amounts, timestamps, and ledger allocation.
+              </p>
+            </div>
+            <span class="badge-flag flag-active" id="payments-count-badge">0 Payments Recorded</span>
+          </div>
+
+          <div id="payments-empty-notice" style="background: #f8fafc; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem; text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">
+            No card payments recorded for current delinquent cycle. Outstanding arrears balance: <strong>£1,240.00</strong>.
+          </div>
+
+          <table class="audit-table" id="payments-table" style="display: none;">
+            <thead>
+              <tr>
+                <th>Receipt ID</th>
+                <th>Timestamp (UTC)</th>
+                <th>Amount Paid</th>
+                <th>Payment Channel</th>
+                <th>Allocation Breakdown</th>
+                <th>Ledger Status</th>
+              </tr>
+            </thead>
+            <tbody id="payments-table-body">
+              <!-- Dynamically populated from ledger-store -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recorded Customer Disputes & Hardship Cases Card -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid #b45309;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; color: var(--color-primary);">
+                Recorded Customer Disputes &amp; Financial Hardship Cases
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+                Live tracking of vulnerability declarations, breathing space holds, and contested balance disputes.
+              </p>
+            </div>
+            <span class="badge-flag flag-pending" id="disputes-count-badge">2 Cases Logged</span>
+          </div>
+
+          <table class="audit-table" id="disputes-table">
+            <thead>
+              <tr>
+                <th>Case ID / Token</th>
+                <th>Timestamp (UTC)</th>
+                <th>Category</th>
+                <th>Reason Code</th>
+                <th>Customer Statement / Context</th>
+                <th>Outreach Status</th>
+                <th>Assigned Queue &amp; SLA</th>
+              </tr>
+            </thead>
+            <tbody id="disputes-table-body">
+              <!-- Dynamically populated from ledger-store -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Outreach Activity Feed -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 0.75rem;">
+            Outreach Activity Feed
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+            Chronological audit of automated communications sent via SMS Gateway and Core Notification Engine.
+          </p>
+
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Timestamp (UTC)</th>
+                <th>Channel</th>
+                <th>Event / Message Summary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="outreach-table-body">
+              <!-- Dynamically populated from ledger-store -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Immutable Audit Trail (Pre-filled Historical Records) -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; color: var(--color-primary);">
+                Append-Only Compliance Audit Log (Pre-filled History)
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+                Immutable compliance event trail recording every automated trigger, status transition, and user action.
+              </p>
+            </div>
+            <span style="font-size: 0.75rem; color: #64748b; font-family: monospace;">Repository: core_audit_trail_v2</span>
+          </div>
+
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Timestamp (UTC)</th>
+                <th>Actor ID</th>
+                <th>Action Code</th>
+                <th>Target Field</th>
+                <th>Old Value</th>
+                <th>New Value</th>
+              </tr>
+            </thead>
+            <tbody id="audit-table-body">
+              <!-- Dynamically populated with pre-filled and live audit rows -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer" style="background: #0f172a; color: #94a3b8; border-top: 1px solid #334155;">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Frontline Collections Operations &amp; Audit Compliance Division.</p>
+    </div>
+  </footer>
+
+  <!-- State Management Scripts -->
+  <script src="ledger-store.js"></script>
+  <script>
+    function renderRepWorkspace() {
+      const state = window.LTBLedger.getState();
+      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+
+      // Toolbar and Snapshot
+      const toolbarBalance = document.getElementById('rep-toolbar-balance');
+      const sidebarArrears = document.getElementById('rep-sidebar-arrears');
+      const sidebarOverdue = document.getElementById('rep-sidebar-overdue');
+
+      if (isPaid) {
+        toolbarBalance.textContent = '£0.00 (Paid in Full)';
+        toolbarBalance.style.color = '#16a34a';
+
+        sidebarArrears.textContent = '£0.00 (Cleared ✓)';
+        sidebarArrears.style.color = '#16a34a';
+
+        sidebarOverdue.textContent = '0 Days (Up to Date)';
+        sidebarOverdue.style.color = '#16a34a';
+
+        document.getElementById('rep-flag-ptp').textContent = 'FALSE (0 - Cleared)';
+        document.getElementById('rep-flag-ptp').className = 'badge-flag';
+        document.getElementById('rep-flag-ptp').style.background = '#e2e8f0';
+        document.getElementById('rep-flag-ptp').style.color = '#475569';
+
+        document.getElementById('rep-flag-paid').textContent = 'TRUE (Paid £1,240.00)';
+        document.getElementById('rep-flag-paid').className = 'badge-flag flag-active';
+
+        document.getElementById('rep-flag-settled').textContent = 'TRUE (1 - Good Standing)';
+        document.getElementById('rep-flag-settled').className = 'badge-flag flag-active';
+
+        document.getElementById('rep-flag-suppress').textContent = 'TRUE (Account Settled)';
+      } else {
+        toolbarBalance.textContent = '£1,240.00';
+        toolbarBalance.style.color = '#b42318';
+
+        sidebarArrears.textContent = '£1,240.00';
+        sidebarArrears.style.color = '#b42318';
+
+        sidebarOverdue.textContent = '34 Days (Cycle 2)';
+        sidebarOverdue.style.color = 'inherit';
+
+        document.getElementById('rep-flag-ptp').textContent = 'TRUE (30d active)';
+        document.getElementById('rep-flag-ptp').className = 'badge-flag flag-active';
+
+        document.getElementById('rep-flag-paid').textContent = 'FALSE (£0.00)';
+        document.getElementById('rep-flag-paid').className = 'badge-flag';
+        document.getElementById('rep-flag-paid').style.background = '#e2e8f0';
+        document.getElementById('rep-flag-paid').style.color = '#475569';
+
+        document.getElementById('rep-flag-settled').textContent = 'FALSE (0)';
+        document.getElementById('rep-flag-settled').className = 'badge-flag';
+        document.getElementById('rep-flag-settled').style.background = '#e2e8f0';
+        document.getElementById('rep-flag-settled').style.color = '#475569';
+
+        document.getElementById('rep-flag-suppress').textContent = 'TRUE (Suppressed)';
+      }
+
+      // Render Recorded Payments Table
+      const paymentsTable = document.getElementById('payments-table');
+      const paymentsBody = document.getElementById('payments-table-body');
+      const emptyNotice = document.getElementById('payments-empty-notice');
+      const countBadge = document.getElementById('payments-count-badge');
+
+      paymentsBody.innerHTML = '';
+
+      if (state.payments && state.payments.length > 0) {
+        paymentsTable.style.display = 'table';
+        emptyNotice.style.display = 'none';
+        countBadge.textContent = state.payments.length + ' Payment(s) Recorded';
+
+        state.payments.forEach(p => {
+          const row = document.createElement('tr');
+          row.style.background = '#f0fdf4';
+          row.innerHTML = `
+            <td><strong style="color: #166534;">#${p.id}</strong></td>
+            <td><strong>${p.timestamp}</strong><br><span style="font-size:0.75rem; color:#64748b;">${p.displayTime}</span></td>
+            <td><span style="font-size:1.1rem; font-weight:800; color:#166534;">£${p.amount.toFixed(2)}</span></td>
+            <td><span class="badge-flag" style="background:#dcfce7; color:#166534;">${p.method}</span></td>
+            <td>£1,200.00 Principal + £40.00 Late Surcharges Cleared</td>
+            <td><span class="badge-flag flag-active">SETTLED &amp; COMMITTED</span></td>
+          `;
+          paymentsBody.appendChild(row);
+        });
+      } else {
+        paymentsTable.style.display = 'none';
+        emptyNotice.style.display = 'block';
+        countBadge.textContent = '0 Payments Recorded';
+      }
+
+      // Render Recorded Disputes & Hardship Cases Table
+      const disputesBody = document.getElementById('disputes-table-body');
+      const disputesCountBadge = document.getElementById('disputes-count-badge');
+      disputesBody.innerHTML = '';
+
+      const cases = state.disputesAndHardships || [];
+      disputesCountBadge.textContent = cases.length + ' Case(s) Logged';
+
+      cases.forEach(c => {
+        const isHardship = (c.category === 'Financial Hardship');
+        const badgeStyle = isHardship ? 'background:#fef3c7; color:#92400e;' : 'background:#fee2e2; color:#b91c1c;';
+        const row = document.createElement('tr');
+        if (isHardship) {
+          row.style.background = '#fffdf5';
+        } else {
+          row.style.background = '#fffafa';
+        }
+        row.innerHTML = `
+          <td><strong>${c.caseId}</strong><br><code style="font-size:0.75rem; color:#2563eb;">${c.token}</code></td>
+          <td><strong>${c.timestamp}</strong><br><span style="font-size:0.75rem; color:#64748b;">${c.displayTime}</span></td>
+          <td><span class="badge-flag" style="${badgeStyle}">${c.category}</span></td>
+          <td><strong>${c.reasonCode}</strong></td>
+          <td style="max-width: 260px; font-size: 0.8rem; color: #334155;">${c.statement}</td>
+          <td><span class="badge-flag flag-suppressed">${c.suppressionStatus}</span></td>
+          <td><strong>${c.assignedQueue}</strong><br><span style="font-size:0.72rem; color:#64748b;">${c.status}</span></td>
+        `;
+        disputesBody.appendChild(row);
+      });
+
+      // Update Hardship & Dispute Flags in Sidebar
+      const hardshipFlagEl = document.getElementById('rep-flag-hardship');
+      const disputeFlagEl = document.getElementById('rep-flag-dispute');
+      const hasOpenHardship = cases.some(c => c.category === 'Financial Hardship');
+      const hasOpenDispute = cases.some(c => c.category === 'Balance Dispute');
+
+      if (hardshipFlagEl) {
+        hardshipFlagEl.textContent = hasOpenHardship ? 'TRUE (30d Hold Active)' : 'FALSE (0)';
+        hardshipFlagEl.className = hasOpenHardship ? 'badge-flag flag-pending' : 'badge-flag';
+        hardshipFlagEl.style.background = hasOpenHardship ? '#fef3c7' : '#e2e8f0';
+        hardshipFlagEl.style.color = hasOpenHardship ? '#92400e' : '#475569';
+      }
+
+      if (disputeFlagEl) {
+        disputeFlagEl.textContent = hasOpenDispute ? 'TRUE (Investigation Open)' : 'FALSE (0)';
+        disputeFlagEl.className = hasOpenDispute ? 'badge-flag flag-pending' : 'badge-flag';
+        disputeFlagEl.style.background = hasOpenDispute ? '#fee2e2' : '#e2e8f0';
+        disputeFlagEl.style.color = hasOpenDispute ? '#b91c1c' : '#475569';
+      }
+
+      // Render Outreach Activity Feed
+      const outreachBody = document.getElementById('outreach-table-body');
+      outreachBody.innerHTML = '';
+      state.outreachFeed.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.timestamp}</td>
+          <td><span class="badge-flag" style="${item.badgeClass || ''}">${item.channel}</span></td>
+          <td>${item.summary}</td>
+          <td><span style="font-weight:600;">${item.status}</span></td>
+        `;
+        outreachBody.appendChild(row);
+      });
+
+      // Render Pre-filled Compliance Audit Trail
+      const auditBody = document.getElementById('audit-table-body');
+      auditBody.innerHTML = '';
+      state.auditLogs.forEach(entry => {
+        const row = document.createElement('tr');
+        const isPayment = entry.action === 'CARD_SETTLEMENT_FULL' || entry.action === 'STATUS_WRITEBACK';
+        const isHardship = entry.action.includes('HARDSHIP');
+        const isDispute = entry.action.includes('DISPUTE');
+        const isSuppression = entry.action.includes('SUPPRESSION');
+
+        let highlightColor = '';
+        if (isPayment) {
+          row.style.background = '#f0fdf4';
+          highlightColor = 'color:#166534; font-weight:700;';
+        } else if (isHardship) {
+          row.style.background = '#fffbeb';
+          highlightColor = 'color:#b45309; font-weight:700;';
+        } else if (isDispute) {
+          row.style.background = '#fef2f2';
+          highlightColor = 'color:#b91c1c; font-weight:700;';
+        } else if (isSuppression) {
+          row.style.background = '#fef2f2';
+          highlightColor = 'color:#b91c1c; font-weight:700;';
+        }
+
+        row.innerHTML = `
+          <td>${entry.timestamp}</td>
+          <td><code>${entry.actor}</code></td>
+          <td><code>${entry.action}</code></td>
+          <td><code>${entry.field}</code></td>
+          <td>${entry.oldVal}</td>
+          <td><strong style="${highlightColor}">${entry.newVal}</strong></td>
+        `;
+        auditBody.appendChild(row);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderRepWorkspace();
+
+      // Simulate Payment
+      document.getElementById('rep-btn-simulate-pay').addEventListener('click', function () {
+        window.LTBLedger.pay(1240.00, 'Debit Card (•••• 4012)');
+        renderRepWorkspace();
+      });
+
+      // Simulate Hardship
+      document.getElementById('rep-btn-simulate-hardship').addEventListener('click', function () {
+        window.LTBLedger.logDisputeOrHardship(
+          'hardship',
+          'HARDSHIP_HEALTH (Medical Crisis)',
+          'Customer reported emergency hospital admission and loss of household earnings. Requested 30-day statutory breathing space hold.'
+        );
+        renderRepWorkspace();
+      });
+
+      // Simulate Dispute
+      document.getElementById('rep-btn-simulate-dispute').addEventListener('click', function () {
+        window.LTBLedger.logDisputeOrHardship(
+          'dispute',
+          'ERR_CALC (Contested Payment Credit)',
+          'Customer asserts uncredited bank transfer of £600 on 01 August. Contesting late surcharge assessment.'
+        );
+        renderRepWorkspace();
+      });
+
+      // Reset Ledger
+      document.getElementById('rep-btn-reset-ledger').addEventListener('click', function () {
+        window.LTBLedger.resetState();
+        renderRepWorkspace();
+      });
+    });
+  </script>
+</body>
+</html>

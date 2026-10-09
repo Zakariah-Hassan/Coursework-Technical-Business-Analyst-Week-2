@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Operations &amp; Reconciliation Reports - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background: #f1f5f9;">
+  <!-- Prototype Nav Banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Executive Reporting Suite:</strong>
+      <div class="demo-links">
+        <a href="01-landing.html">&larr; Customer Portal</a>
+        <a href="03-account-summary.html">Account Summary</a>
+        <a href="rep-workspace.html">Representative Workspace</a>
+        <a href="management-reports.html" style="font-weight:700; color:#fff;">[Active: Executive Reports]</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="header" style="background: #0f172a; border-bottom: 2px solid #059669;">
+    <div class="header-container">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="brand-icon" style="background: #059669;">LTB</div>
+        <div>
+          <strong style="color: #ffffff; font-size: 1.15rem; display: block;">Collections &amp; Recovery Executive Reporting Suite</strong>
+          <span style="font-size: 0.75rem; color: #94a3b8;">Department: Operational Performance, Analytics &amp; Ledger Reconciliation &bull; Cycle: Monthly Audit</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <span class="badge-flag" style="background: #1e293b; color: #6ee7b7; border: 1px solid #059669;">
+          ● Data Pipeline: Real-Time Telemetry
+        </span>
+        <button class="btn btn-outline" style="color:#ffffff; border-color:#475569; padding: 0.35rem 0.75rem; font-size: 0.8rem;" onclick="window.print(); return false;">
+          Print / Export Report (PDF)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper" style="max-width: 1140px;">
+    <!-- Title Card -->
+    <section class="card" style="margin-bottom: 1.5rem; padding: 1.75rem 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 class="card-title" style="font-size: 1.6rem; color: var(--color-primary);">
+            Portal Performance, Operational Efficiency &amp; Reconciliation Dashboard
+          </h1>
+          <p class="card-subtitle">
+            Official operational reporting derived from portal telemetry, core collections databases, and reconciliation logs.
+          </p>
+        </div>
+        <div style="text-align: right; font-size: 0.85rem; color: var(--color-text-muted);">
+          Reporting Window: <strong>Current Financial Month (Oct 2026)</strong><br>
+          Generated: <strong>09 October 2026, 11:00 UTC</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Executive Summary Stat Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+      <!-- KPI 1 -->
+      <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid #0369a1; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="stat-label">Overdue Balance Self-Service</span>
+          <span style="font-size: 1.2rem;">📉</span>
+        </div>
+        <div class="stat-amount" style="color: #0369a1; font-size: 2.2rem; margin: 0.35rem 0;">12.49%</div>
+        <div class="debt-progress-wrapper" style="height: 6px; margin: 0.5rem 0;">
+          <div style="background: #0369a1; width: 12.5%;"></div>
+          <div style="background: #e2e8f0; width: 87.5%;"></div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted);">
+          <strong>Reduced Admin Effort:</strong> Removes routine balance enquiries, targeting the 12.49% of viewed accounts that have overdue balances.
+        </p>
+      </div>
+
+      <!-- KPI 2 -->
+      <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid var(--color-accent); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="stat-label">Routine Contact Diverted (PTP)</span>
+          <span style="font-size: 1.2rem;">🤝</span>
+        </div>
+        <div class="stat-amount" style="color: var(--color-accent); font-size: 2.2rem; margin: 0.35rem 0;">12.08%</div>
+        <div class="debt-progress-wrapper" style="height: 6px; margin: 0.5rem 0;">
+          <div style="background: var(--color-accent); width: 12.1%;"></div>
+          <div style="background: #e2e8f0; width: 87.9%;"></div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted);">
+          <strong>Reduced Admin Effort:</strong> Removes routine contact resulting in promises to pay across sample account interactions.
+        </p>
+      </div>
+
+      <!-- KPI 3 -->
+      <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid #7c3aed; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="stat-label">Queue Wait Time Reduction</span>
+          <span style="font-size: 1.2rem;">⚡</span>
+        </div>
+        <div class="stat-amount" style="color: #7c3aed; font-size: 2.2rem; margin: 0.35rem 0;">- 58%</div>
+        <div class="debt-progress-wrapper" style="height: 6px; margin: 0.5rem 0;">
+          <div style="background: #7c3aed; width: 58%;"></div>
+          <div style="background: #e2e8f0; width: 42%;"></div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted);">
+          <strong>Faster Next Action:</strong> Automatable customers resolve online; fewer cases in queue cuts wait times across all tiers.
+        </p>
+      </div>
+
+      <!-- KPI 4 -->
+      <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid #059669; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="stat-label">PTP Follow-Up Compliance</span>
+          <span style="font-size: 1.2rem;">✅</span>
+        </div>
+        <div class="stat-amount" style="color: #059669; font-size: 2.2rem; margin: 0.35rem 0;">99.4%</div>
+        <div class="debt-progress-wrapper" style="height: 6px; margin: 0.5rem 0;">
+          <div style="background: #059669; width: 99.4%;"></div>
+          <div style="background: #e2e8f0; width: 0.6%;"></div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted);">
+          <strong>Follow-Up Consistency:</strong> Well-tracked promises to pay make scheduling, tracking, and enforcing follow-ups systematic.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 1: Portal Evaluation & Operational Efficiency -->
+    <section class="card" style="padding: 2rem; margin-bottom: 2rem;">
+      <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 0.75rem;">
+        <h2 style="font-size: 1.25rem; color: var(--color-primary);">
+          Report 1: Portal Operational Impact &amp; Admin Effort Reduction
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+          Actionable insights into portal performance, operational efficiency, customer uptake, and contact reduction.
+        </p>
+      </div>
+
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Process Stream / Function</th>
+            <th>Baseline As-Is Metric</th>
+            <th>Portal Automated Metric</th>
+            <th>Operational Impact &amp; Benefit Summary</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Routine Balance Inquiries</strong></td>
+            <td>100% Agent Phone Contact</td>
+            <td>87.5% Self-Service Resolution</td>
+            <td>Removes routine balance enquiries, directly targeting the 12.49% of accounts viewed with overdue balances.</td>
+            <td><span class="badge-flag flag-active">Target Exceeded</span></td>
+          </tr>
+          <tr>
+            <td><strong>Promise-to-Pay Commitments</strong></td>
+            <td>Manual Phone Negotiation</td>
+            <td>Digital PTP Capture (30-day window)</td>
+            <td>Removes routine contact resulting in promises to pay, addressing 12.08% of sample account interactions.</td>
+            <td><span class="badge-flag flag-active">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Payment Plan Consultations</strong></td>
+            <td>18 mins agent call avg.</td>
+            <td>Instant Digital Schedule Setup</td>
+            <td>Representatives no longer need to manually present and describe payment plan options.</td>
+            <td><span class="badge-flag flag-active">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>Customer Case Context Handoff</strong></td>
+            <td>Customer re-explains circumstances</td>
+            <td>Automated Handover Token &amp; Feed</td>
+            <td>Customers no longer repeat context; representatives spend less time checking case status.</td>
+            <td><span class="badge-flag flag-active">Optimised</span></td>
+          </tr>
+          <tr>
+            <td><strong>Automatable Workload Routing</strong></td>
+            <td>Unfiltered General Queue</td>
+            <td>Rules-Based Digital Triage</td>
+            <td>Representative time no longer spent on automatable cases, reserving specialist capacity for vulnerability/hardship.</td>
+            <td><span class="badge-flag flag-active">Optimised</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 2: Reconciliation & Audit Efficiency -->
+    <section class="card" style="padding: 2rem;">
+      <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 0.75rem;">
+        <h2 style="font-size: 1.25rem; color: var(--color-primary);">
+          Report 2: Ledger Reconciliation &amp; Audit Trail Consistency
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+          Audit efficiency analysis comparing portal automated data capture against legacy manual spreadsheet trackers.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div style="background: #ffffff; border: 1.5px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <h3 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+            📊 Data Capture &amp; Audit Trail Quality
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.6;">
+            <strong>Clearer Reporting:</strong> Better organized data trail for portal interactions than representative interactions. Consistent data capture and labelling improves internal and regulatory audit efficiency.
+          </p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; display: flex; justify-content: space-between; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
+            <span>Audit Preparation Time:</span>
+            <strong style="color: var(--color-accent);">- 74% Reduction</strong>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1.5px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <h3 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+            🔄 Automated Ledger Synchronization
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.6;">
+            <strong>Immediate Status Flags:</strong> Replaces manual spreadsheet updating with real-time API write-backs to core tables. Eliminates duplicate outreach and prevents status discrepancies.
+          </p>
+          <div style="margin-top: 1rem; font-size: 0.85rem; display: flex; justify-content: space-between; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
+            <span>Ledger Synchronization Latency:</span>
+            <strong style="color: var(--color-accent);">&lt; 2.0 Seconds</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funnel Abandonment & Drop-off Breakdown -->
+      <h3 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 0.75rem;">
+        Funnel Conversion &amp; Telemetry Analytics
+      </h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Funnel Stage</th>
+            <th>Unique Sessions</th>
+            <th>Step Completion Rate</th>
+            <th>Drop-off / Escalation Pathway</th>
+            <th>Primary Trigger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Landing &amp; Credential Lookup</strong></td>
+            <td>14,820</td>
+            <td>94.2%</td>
+            <td>5.8% Exit / Direct Line Call</td>
+            <td>Customer preference to call representative directly</td>
+          </tr>
+          <tr>
+            <td><strong>2. Two-Factor Authentication</strong></td>
+            <td>13,960</td>
+            <td>91.6%</td>
+            <td>8.4% Security Routing</td>
+            <td>Incorrect OTP / 3-attempt security lockout</td>
+          </tr>
+          <tr>
+            <td><strong>3. Account &amp; Arrears Summary</strong></td>
+            <td>12,788</td>
+            <td>96.1%</td>
+            <td>3.9% Hardship Form Trigger</td>
+            <td>Dispute balance or financial vulnerability declared</td>
+          </tr>
+          <tr>
+            <td><strong>4. Solution Selection (PTP / Plan / Pay)</strong></td>
+            <td>12,290</td>
+            <td>89.4%</td>
+            <td>10.6% Advisor Phone Booking</td>
+            <td>Date &gt;30d or standard plans unaffordable</td>
+          </tr>
+          <tr>
+            <td><strong>5. Final Confirmation &amp; Ledger Commit</strong></td>
+            <td>10,987</td>
+            <td>99.8%</td>
+            <td>0.2% Technical Retries</td>
+            <td>Successful multi-channel dispatch (SMS &amp; Email)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" style="background: #0f172a; color: #94a3b8; border-top: 1px solid #334155;">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Group Operations, Executive Performance &amp; Risk Oversight.</p>
+    </div>
+  </footer>
+</body>
+</html>

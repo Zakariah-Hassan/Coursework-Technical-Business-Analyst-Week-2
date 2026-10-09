@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispute Debt & Hardship Declaration - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="03-account-summary.html">&larr; Back to Account Summary</a>
+        <a href="06-routed-representative.html?reason=dispute-submitted">Submit Intake &amp; Pause Collections &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Executive Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge" style="background: rgba(194, 97, 0, 0.25);">
+        <span>⚖️ Dispute &amp; Financial Hardship Intake</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item completed">
+        <div class="step-circle">✓</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <div class="step-label">Dispute / Hardship</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Case Routing</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title">Dispute Balance or Declare Financial Hardship</h1>
+        <p class="card-subtitle">Submitting this form immediately places an automated hold on collection communications while our team reviews your situation.</p>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>Automated Collection Freeze:</strong> As soon as you submit this declaration, an immediate hold will be placed on your account. All automated phone calls, SMS payment reminders, and collection correspondence will be paused while our specialist team conducts a review.
+      </div>
+
+      <form id="dispute-hardship-form" action="06-routed-representative.html" method="get">
+        <input type="hidden" name="reason" value="form-submitted">
+
+        <!-- Declaration Category Selection -->
+        <div class="form-group">
+          <label class="form-label">Select Intake Category</label>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+            <label class="plan-radio-label" style="padding: 1rem;">
+              <input type="radio" name="intakeCategory" value="dispute" checked>
+              <strong style="color: var(--color-primary); margin-left: 0.5rem;">Dispute Account Balance or Charges</strong>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 1.8rem; margin-top: 0.25rem;">
+                I believe the balance calculation, late surcharge, or loan balance is incorrect, or I suspect unauthorized activity.
+              </p>
+            </label>
+
+            <label class="plan-radio-label" style="padding: 1rem;">
+              <input type="radio" name="intakeCategory" value="hardship">
+              <strong style="color: #92400e; margin-left: 0.5rem;">Declare Financial Hardship or Vulnerability</strong>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-left: 1.8rem; margin-top: 0.25rem;">
+                I am experiencing severe financial difficulty due to illness, job redundancy, bereavement, or mental health, and cannot afford basic payments.
+              </p>
+            </label>
+          </div>
+        </div>
+
+        <!-- Standard Dispute Reason Codes -->
+        <div class="form-group">
+          <label class="form-label" for="reasonCode">Primary Reason Code</label>
+          <select class="form-control" id="reasonCode" name="reasonCode" required>
+            <option value="ERR_CALC">Incorrect Balance Calculation / Uncredited Payment</option>
+            <option value="FEE_DISPUTE">Dispute of Unfair Late Assessment Surcharges</option>
+            <option value="SUSPECTED_FRAUD">Suspected Unauthorized Transaction / Identity Fraud</option>
+            <option value="HARDSHIP_HEALTH">Medical Illness / Long-term Incapacity</option>
+            <option value="HARDSHIP_INCOME">Redundancy / Loss of Household Income</option>
+            <option value="STATUTORY_BREATHING">Application for Statutory Debt Respite (Breathing Space)</option>
+          </select>
+          <span class="form-hint">Standardized reason code logged to core compliance tables.</span>
+        </div>
+
+        <!-- Customer Statement -->
+        <div class="form-group">
+          <label class="form-label" for="statement">Detailed Statement</label>
+          <textarea class="form-control" id="statement" name="statement" rows="4" placeholder="Please outline the dates, payment references, or hardship details so our Dispute Specialists have complete context..." required>I was made redundant at the end of July and am awaiting universal credit approval. My arrears surcharge of £40.00 was applied when I had already notified the branch.</textarea>
+          <span class="form-hint">Captured verbatim into Representative Workspace activity feed.</span>
+        </div>
+
+        <!-- Supporting Evidence Document Upload Mock -->
+        <div class="form-group">
+          <label class="form-label" for="docUpload">Attach Supporting Documents (Optional)</label>
+          <input class="form-control" type="file" id="docUpload" name="docUpload" disabled>
+          <span class="form-hint">Accepts PDF, JPG, PNG (e.g. proof of redundancy, medical certificate, bank statements).</span>
+        </div>
+
+        <!-- Statutory declaration checkbox -->
+        <div class="form-group" style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+            <input type="checkbox" name="hardshipConsent" required checked style="margin-top: 0.25rem;">
+            <span style="font-size: 0.9rem; color: var(--color-text);">
+              <strong>Declaration of Truth:</strong> I confirm that the information provided above is accurate to the best of my knowledge. I understand that submitting this declaration routes my case to the Dispute &amp; Vulnerability Specialist Queue with an assigned SLA tracking timer.
+            </span>
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary" style="background: #c26100;">
+            Submit Intake &amp; Pause Collections &rarr;
+          </button>
+          <a href="03-account-summary.html" class="btn btn-outline">Cancel and Return</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc. Customer Vulnerability &amp; Dispute Governance Framework.</p>
+    </div>
+  </footer>
+
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
+  <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('dispute-hardship-form');
+      form.addEventListener('submit', function (e) {
+        const category = document.querySelector('input[name="intakeCategory"]:checked')?.value || 'hardship';
+        const reasonCode = document.getElementById('reasonCode')?.value || 'GENERAL_REVIEW';
+        const statement = document.getElementById('statement')?.value || '';
+
+        // Record in the central ledger store & audit log
+        window.LTBLedger.logDisputeOrHardship(category, reasonCode, statement);
+      });
+    });
+  </script>
+</body>
+</html>

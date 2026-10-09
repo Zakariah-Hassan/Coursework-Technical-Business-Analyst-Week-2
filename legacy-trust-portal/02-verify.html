@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identity Verification - Legacy Trust Bank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Demo banner -->
+  <aside class="demo-banner">
+    <div class="demo-banner-content">
+      <strong>Prototype Navigation:</strong>
+      <div class="demo-links">
+        <a href="01-landing.html">&larr; Landing</a>
+        <a href="02-verify.html" style="font-weight:700;">[Verification]</a>
+        <a href="02-verify-failed.html" style="color: #fca5a5;">Exception: Failed Verification (Attempt 2 of 3) &rarr;</a>
+        <a href="07-unhappy-lockout.html" style="color:#f87171;">Unhappy Path: Security Lockout &rarr;</a>
+        <a href="#modal-timeout" style="color: #fde047;">Simulate Inactivity Warning</a>
+        <a href="#modal-ratelimit" style="color: #fca5a5;">Simulate Resend Limit Exceeded</a>
+        <a href="03-account-summary.html">Verification Success &rarr;</a>
+        <a href="rep-workspace.html" class="badge-rep">Representative Workspace</a>
+        <a href="management-reports.html" class="badge-rep" style="background:#059669;">Management Reports</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="01-landing.html" class="brand-badge">
+        <div class="brand-icon">LTB</div>
+        <div class="brand-title">Legacy Trust Bank</div>
+      </a>
+      <div class="header-security-badge">
+        <span>🔒 Step 1 of 4: Two-Factor Identity Verification</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-item active">
+        <div class="step-circle">1</div>
+        <div class="step-label">Verification</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">2</div>
+        <div class="step-label">Account Details</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">3</div>
+        <div class="step-label">Select Solution</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <div class="step-label">Confirmation</div>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-header">
+        <h1 class="card-title">Security & Two-Factor Authentication</h1>
+        <p class="card-subtitle">Your credentials have been matched with active account records.</p>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Matched Core Record:</strong> Account Reference <strong>LTB-8849-2104</strong> recognized. A 6-digit One-Time Passcode (OTP) has been dispatched via SMS to registered mobile ending in <strong>•••• 4921</strong>.
+      </div>
+
+      <form action="03-account-summary.html" method="get">
+        <div class="form-group">
+          <label class="form-label" for="dob">Date of Birth</label>
+          <input class="form-control" type="date" id="dob" name="dob" value="1985-06-14" required>
+          <span class="form-hint">Matches primary borrower records on file.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="otp">6-Digit SMS Security Code</label>
+          <div style="display: flex; gap: 0.6rem; margin: 0.5rem 0 0.25rem;">
+            <input class="otp-digit-box" type="text" maxlength="1" value="7" readonly>
+            <input class="otp-digit-box" type="text" maxlength="1" value="4" readonly>
+            <input class="otp-digit-box" type="text" maxlength="1" value="9" readonly>
+            <input class="otp-digit-box" type="text" maxlength="1" value="2" readonly>
+            <input class="otp-digit-box" type="text" maxlength="1" value="0" readonly>
+            <input class="otp-digit-box" type="text" maxlength="1" value="1" readonly>
+          </div>
+          <input type="hidden" id="otp" name="otp" value="749201">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="form-hint" style="margin-top: 0;">Code automatically filled from test SMS &bull; Expires in 04:32</span>
+            <a href="#modal-resend" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+              Resend SMS Code
+            </a>
+          </div>
+        </div>
+
+        <div class="btn-group" style="flex-direction: column; align-items: stretch; gap: 0.75rem;">
+          <button type="submit" class="btn btn-primary" style="justify-content: center; font-size: 1.05rem; padding: 0.85rem;">
+            Verify and Access Account (Happy Path) &rarr;
+          </button>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="02-verify-failed.html" class="btn btn-outline" style="flex: 1; border-color: #fca5a5; color: var(--color-danger); justify-content: center;">
+              ⚠️ Simulate Failed Verification (Attempt 2 of 3) &rarr;
+            </a>
+            <a href="07-unhappy-lockout.html" class="btn btn-outline" style="flex: 1; border-color: #cbd5e1; color: var(--color-text-muted); justify-content: center;">
+              🔒 Simulate 3 Failed Attempts (15-Min Lockout) &rarr;
+            </a>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Support Notice -->
+    <div style="text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">
+      Need alternative access? <a href="06-routed-representative.html?reason=auth-help" style="color: #2563eb; text-decoration: underline;">Request manual verification from our representative team</a>.
+    </div>
+  </main>
+
+  <!-- PURE CSS MODAL 1: Inactivity Warning -->
+  <div id="modal-timeout" class="modal-overlay">
+    <div class="modal-card">
+      <a href="#close" class="modal-close-btn">&times;</a>
+      <h2 style="font-size: 1.35rem; color: var(--color-primary); margin: 0.5rem 0;">Are you still there?</h2>
+      <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        For your protection, banking sessions automatically close after 15 minutes of inactivity to keep your financial records secure.
+      </p>
+
+      <div style="text-align: center; margin: 1.5rem 0;">
+        <div class="countdown-pill" style="font-size: 1.1rem; padding: 0.6rem 1.25rem;">
+          ⏱️ Session expires in: <strong>01:58</strong>
+        </div>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1.5rem;">
+        If no action is taken, your session tokens will be invalidated and you will be returned to the login screen.
+      </p>
+
+      <div class="btn-group" style="justify-content: center; margin-top: 0;">
+        <a href="#close" class="btn btn-primary">Continue Session</a>
+        <a href="01-landing.html?session=expired" class="btn btn-outline">Log Out Securely</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURE CSS MODAL 2: Resend Cooldown -->
+  <div id="modal-resend" class="modal-overlay">
+    <div class="modal-card">
+      <a href="#close" class="modal-close-btn">&times;</a>
+      <h2 style="font-size: 1.35rem; color: var(--color-primary); margin: 0.5rem 0;">New SMS Code Dispatched</h2>
+      <div class="alert alert-success">
+        A new 6-digit passcode has been transmitted via SMS to <strong>•••• 4921</strong>.
+      </div>
+      <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+        To prevent messaging abuse, a 60-second cooldown is enforced between requests.
+      </p>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm); text-align: center; font-weight: 600; color: #475569; margin-bottom: 1.5rem;">
+        ⏳ Cooldown timer active: Resend disabled for 54s
+      </div>
+      <div class="btn-group" style="justify-content: flex-end; margin-top: 0;">
+        <a href="#close" class="btn btn-primary">Return to Code Input</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURE CSS MODAL 3: Rate Limit Block -->
+  <div id="modal-ratelimit" class="modal-overlay">
+    <div class="modal-card">
+      <a href="#close" class="modal-close-btn">&times;</a>
+      <h2 style="font-size: 1.35rem; color: var(--color-danger); margin: 0.5rem 0;">Maximum Passcode Requests Reached</h2>
+      <div class="alert alert-danger">
+        <strong>Maximum passcode requests reached. Please try again in 1 hour.</strong>
+      </div>
+      <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+        You have requested 4 SMS passcodes within the last 60 minutes. As a security policy, automated SMS dispatch for account <strong>LTB-8849-2104</strong> is temporarily paused.
+      </p>
+      <div class="btn-group" style="justify-content: flex-end; margin-top: 0;">
+        <a href="06-routed-representative.html?reason=otp-limit" class="btn btn-primary">Speak to an Advisor &rarr;</a>
+        <a href="#close" class="btn btn-outline">Close</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Legacy Trust Bank plc.</p>
+    </div>
+  </footer>
+
+  <!-- 1-Minute Inactivity Session Manager -->
+  <script src="session-timer.js"></script>
+</body>
+</html>
