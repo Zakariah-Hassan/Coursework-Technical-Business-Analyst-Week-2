@@ -1,0 +1,42 @@
+## 1. Stakeholder Change Readiness Assessment (ADKAR Framework)
+
+| Stakeholder Group | Awareness (A) | Desire (D) | Knowledge (K) | Ability (A) | Reinforcement (R) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Collections Representatives** | **High:** Frontline reps recognise the legacy core database and 200-sheet Excel tracker are broken, wasting **2.86 hours per day** on manual re-keying and status cross-referencing. | **Low–Medium:** Fear that self-service automation will either dump broken cases onto their desks or threaten job security. Resistance from veteran reps who consider offline workarounds faster than official banking systems. | **Medium:** High familiarity with collections domain and customer negotiation, but zero experience operating a unified web portal interface or managing Camunda 8 SLA callback timers. | **Low:** High risk of reps bypassing the official system if the portal lacks account context or forces double data entry into core ledgers. | **Medium:** Requires clear operational KPIs that reward portal adoption, status tag accuracy, and clean escalation handoffs rather than raw call handle time alone. |
+| **Team Leaders & Operations Managers** | **High:** Acute awareness of operational friction, audit vulnerabilities, and the estimated **£500,000 annual loss** caused by spreadsheet reconciliation failures. | **High:** Strong motivation to eliminate month-end reconciliation waste and establish real-time operational visibility across agent queues. | **Medium:** Requires structured training on interpreting real-time manager observability dashboards, monitoring SLA boundary timers, and handling automated exception escalations. | **Medium:** Ability is constrained if the To-Be system fails to write real-time status flags (`dispute_flag = 1`, `ptp_active = 1`) back to core database tables (`DEP-03`). | **High:** High-visibility dashboard metrics, automated daily reconciliation reports, and audit trail access reinforce managerial control. |
+| **Delinquent Customers** | **Low–Medium:** Customers missing payments are frequently unaware that a digital self-service portal exists, assuming they must make phone calls during restricted bank operating hours. | **High:** Strong desire for discreet, 24/7 digital resolution that gives them control over debt breakdowns without feeling pressured, rushed, or judged on live phone calls. | **Medium–Low:** Varying digital literacy levels. Customers will struggle if 2FA authentication, balance breakdowns, or installment plan selection steps are complex or jargon-heavy. | **High (Conditional):** If the portal errors out, lacks flexible pre-approved plans, or fails to confirm commitments instantly, customer ability collapses, causing abandonment to phone queues. | **High:** Instant SMS/email digital confirmations and automated reminders 48 hours prior to PTP due dates reinforce positive payment behavior and trust. |
+
+---
+
+## 2. Change & Adoption Risk Management
+
+### Risk 1: Rep System Bypass & Shadow Spreadsheet Persistence
+* **Risk Description:** Experienced representatives ignore the new portal and continue using local shadow Excel trackers because they believe offline workarounds are faster or more familiar.
+* **ADKAR Failure Point:** Desire & Ability (Collections Representatives).
+* **Designed Phase 1 Mitigation Action:**
+  * **Deliver Rep Interaction History Portal (`US-07` / `SO-06`):** Provide a dedicated frontline workspace displaying real-time customer portal actions, active PTPs, payments, and outreach history.
+  * **Eliminate Double-Entry:** Ensure core database status write-backs (`DEP-03`) update rep feeds automatically, saving 2.86 hours/day per rep and removing the operational need for shadow spreadsheets.
+  * **Adoption Champions:** Enlist Gareth Evans (Operations Lead) to co-design rep portal screens during sprint reviews to guarantee frontline usability and workflow alignment.
+
+### Risk 2: Customer Portal Abandonment Due to Brittle or Confusing UX
+* **Risk Description:** Customers encounter friction during 2FA login, balance lookup, or plan selection, causing them to abandon self-service and flood phone queues or default on debts.
+* **ADKAR Failure Point:** Knowledge & Ability (Customers).
+* **Designed Phase 1 Mitigation Action:**
+  * **Frictionless 2FA (`US-01` / `DEP-04`):** Authenticate using simple Account Reference / DOB paired with dynamic 6-digit SMS OTP.
+  * **Clear Pre-Approved Schedules (`US-10` / `SO-03`):** Present 3–4 transparent, pre-calculated monthly installment options (3, 6, 9, 12 months) with complete fee and interest freeze.
+  * **Instant Confirmation Dispatch (`US-13`):** Send immediate SMS and PDF email payment receipts within 60 seconds of transaction commitment to build trust.
+
+### Risk 3: Manager Observability Gap & Queue Misallocation
+* **Risk Description:** Team leaders cannot monitor self-service deflection, queue progression, or representative SLA performance, leading to unaddressed exception queues and manager resistance.
+* **ADKAR Failure Point:** Knowledge & Reinforcement (Team Leaders).
+* **Designed Phase 1 Mitigation Action:**
+  * **Real-Time Ledger Status Flags (`US-19` / `DEP-03`):** Asynchronously write parameter status tags (`dispute_flag = 1`, `ptp_active = 1`, `outreach_suppression = 1`) directly to core database tables.
+  * **Team Leader Dashboard View (`US-23`):** Provide real-time supervisor visibility into deflected volume, active PTPs, and overdue SLA callback alerts without manual spreadsheet cross-referencing.
+
+### Risk 4: Unmanaged Hardship & Dispute Intake Handling
+* **Risk Description:** Customers declare financial hardship or dispute an arrears balance online, but automated collections outreach continues, exposing the bank to severe FCA compliance fines and ombudsman disputes.
+* **ADKAR Failure Point:** Desire & Ability (Compliance & Representatives).
+* **Designed Phase 1 Mitigation Action:**
+  * **Digital Dispute & Hardship Intake Form (`US-15`):** Provide a structured self-service disclosure form in the customer portal.
+  * **Instant Automated Outreach Suppression (`US-14`):** Automatically toggle `outreach_suppression = true` in core ledgers within < 2 seconds upon form submission, freezing all dialer/email campaigns.
+  * **Rules-Based Exception Queue Routing (`US-16` / `SO-05`):** Automatically route exception accounts to human specialist queues with attached SLA callback timers (24h Vulnerability, 48h Dispute).

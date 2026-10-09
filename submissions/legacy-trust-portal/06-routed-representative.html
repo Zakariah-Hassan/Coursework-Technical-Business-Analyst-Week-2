@@ -41,7 +41,7 @@
       </div>
 
       <div class="alert alert-info">
-        <strong>Automatic Enforcement Freeze:</strong> Under Legacy Trust Bank Vulnerability & Fairness Policy, selecting this pathway has logged an immediate <strong>30-day statutory breathing space hold</strong> on your account <strong>LTB-8849-2104</strong>. All debt recovery notices, letters, and late fees have been halted.
+        <strong>Automatic Enforcement Freeze:</strong> Under Legacy Trust Bank Vulnerability &amp; Fairness Policy, selecting this pathway has logged an immediate <strong>30-day statutory breathing space hold</strong> on your account <strong id="routed-account-ref">LTB-8849-2104</strong>. All debt recovery notices, letters, and late fees have been halted.
       </div>
 
       <!-- Case handover packet -->
@@ -110,16 +110,20 @@
   <script src="session-timer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const state = window.LTBLedger.getState();
-      if (state.disputesAndHardships && state.disputesAndHardships.length > 0) {
-        const latestCase = state.disputesAndHardships[0];
+      const user = window.LTBLedger.getActiveUser();
+      if (user) {
+        const refEl = document.getElementById('routed-account-ref');
+        if (refEl) refEl.textContent = user.accountRef;
+
         const tokenEl = document.getElementById('routed-handover-token');
         const badgeEl = document.getElementById('routed-queue-badge');
-        if (tokenEl && latestCase.token) {
-          tokenEl.textContent = latestCase.token;
-        }
-        if (badgeEl && latestCase.assignedQueue) {
-          badgeEl.textContent = 'Queued in ' + latestCase.assignedQueue;
+
+        if (user.disputesAndHardships && user.disputesAndHardships.length > 0) {
+          const latestCase = user.disputesAndHardships[0];
+          if (tokenEl && latestCase.token) tokenEl.textContent = latestCase.token;
+          if (badgeEl && latestCase.assignedQueue) badgeEl.textContent = 'Queued in ' + latestCase.assignedQueue;
+        } else {
+          if (tokenEl) tokenEl.textContent = '#LTB-HANDOVER-' + user.accountRef.split('-')[1] + '-CASE';
         }
       }
     });

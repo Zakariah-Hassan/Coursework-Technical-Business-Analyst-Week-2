@@ -1,0 +1,300 @@
+Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Due date,Votes,Description,Environment,Watchers,Watchers Id,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,Custom field (Development),Custom field (Estimate),Custom field (Issue color),Custom field (Rank),Custom field (Start date),Custom field (Story point estimate),Custom field (Team),Custom field (Vulnerability),Parent,Parent key,Parent summary,Status category,Status category changed
+Access and verification,DRB-1,10011,Epic,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,07/Oct/26 9:56 AM,07/Oct/26 9:56 AM,09/Oct/26 11:01 AM,,,0,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},,,0|i0001q:,,,,,,,,To Do,07/Oct/26 9:56 AM
+Account visibility,DRB-2,10012,Epic,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,07/Oct/26 9:57 AM,07/Oct/26 9:57 AM,,,,0,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},,,0|i0001v:,,,,,,,,To Do,07/Oct/26 9:57 AM
+Promise-to-pay,DRB-3,10013,Epic,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,07/Oct/26 9:57 AM,07/Oct/26 9:57 AM,,,,0,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},,,0|i00027:,,,,,,,,To Do,07/Oct/26 9:57 AM
+Routing and exception handling,DRB-4,10014,Epic,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,07/Oct/26 9:57 AM,07/Oct/26 9:57 AM,,,,0,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},,,0|i0002b:,,,,,,,,To Do,07/Oct/26 9:57 AM
+Reporting and audit trail,DRB-5,10015,Epic,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,07/Oct/26 9:57 AM,07/Oct/26 9:57 AM,,,,0,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},,,0|i0002m:,,,,,,,,To Do,07/Oct/26 9:57 AM
+US-01: SMS 2FA Authentication,DRB-22,10032,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:52 PM,,,0,"*User Story:*
+As a customer, I want to log in using my account details and a mobile OTP so that I can securely view my account.
+
+*Business Value:*
+Meets data privacy regulations and prevents unauthorized account access.
+
+*Acceptance Criteria:*
+Entering a valid Account Number and DOB sends a 6-digit SMS OTP to the registered mobile number. Submitting the correct OTP within 5 minutes logs the user in and redirects to the Account Summary. Entering an incorrect or expired OTP 3 consecutive times locks the session for 15 minutes.
+
+*Dependencies:*
+DEP-04 (Enterprise SMS Gateway - Owner TBC), DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+Assumes mobile numbers in the database can receive SMS. Maps to Camunda Step 1 (2FA Identity Verification). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i0002w:,,,,,10011,DRB-1,Access and verification,To Do,08/Oct/26 2:48 PM
+US-02: Account Credential Lookup,DRB-23,10033,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:52 PM,,,0,"*User Story:*
+As a customer, I want the system to validate my Account Number and Date of Birth against core records, so that I am recognized before an OTP is generated.
+
+*Business Value:*
+Prevents invalid account access attempts and unnecessary SMS costs.
+
+*Acceptance Criteria:*
+Submitting credentials queries POST /api/v1/auth/lookup via DEP-01. Matching active records return a masked mobile number and proceed to OTP dispatch. Unmatched records display ""Invalid credentials provided"" without revealing account status.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+API lookup must respond in under 800ms. Maps to Camunda Step 1.1 (Core DB Identity Lookup). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i00034:,,,,,10011,DRB-1,Access and verification,To Do,08/Oct/26 2:48 PM
+US-03: Session Auto-Logout,DRB-24,10034,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:53 PM,,,0,"*User Story:*
+As a compliance officer, I want inactive sessions to log out after 15 minutes so that customer data remains secure.
+
+*Business Value:*
+Ensures compliance with banking web security standards.
+
+*Acceptance Criteria:*
+After 13 minutes of inactivity, display a popup warning with a 120-second countdown. If inactive for 15 minutes total, clear session tokens and redirect to the login screen.
+
+*Dependencies:*
+None
+
+*Notes / Assumptions:*
+Uses client-side timer backed by server JWT expiration. Maps to Camunda Sub-process (Session Security Gateway). Estimated Eng Hours: 8.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},2,,0|i0003d:,,,,,10011,DRB-1,Access and verification,To Do,08/Oct/26 2:48 PM
+US-04: OTP Resend Rate Limiting,DRB-25,10035,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:53 PM,,,0,"*User Story:*
+As a product manager, I want to limit OTP resends to 3 per hour so that SMS gateway costs are controlled.
+
+*Business Value:*
+Prevents API abuse and reduces messaging costs.
+
+*Acceptance Criteria:*
+Given a customer clicks ""Resend OTP"", When request count is 3 within 60 minutes, Then a new OTP is dispatched with a 60-second cooldown timer on the button. Given a customer requests an OTP for the 4th time in 60 minutes, When clicked, Then the system blocks the request and displays ""Maximum OTP requests reached. Please try again in 1 hour.""
+
+*Dependencies:*
+DEP-04 (Enterprise SMS Gateway - Owner TBC)
+
+*Notes / Assumptions:*
+Counter stored in session cache per Account ID. Maps to Camunda Step 1.2 (SMS Rate Limiter Gateway). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0003e:,,,,,10011,DRB-1,Access and verification,To Do,08/Oct/26 2:48 PM
+US-05: Real-Time Balance Summary,DRB-26,10036,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:53 PM,,,0,"*User Story:*
+As a customer, I want to see my balance, arrears, and due date on my dashboard so that I understand what I owe.
+
+*Business Value:*
+Reduces call volume (SO-01) for routine account inquiries.
+
+*Acceptance Criteria:*
+On login, query GET /api/v1/accounts/{id}/balance via DEP-01. Display Total Balance, Arrears Amount, Days Delinquent, and Current Status when data loads. If backend API fails, display ""Account summary temporarily unavailable"".
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+Reflects real-time ledger data. Maps to Camunda Step 2 (Account Summary View). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i0003m:,,,,,10012,DRB-2,Account visibility,To Do,08/Oct/26 2:48 PM
+US-06: Itemized Debt Details,DRB-27,10037,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,09/Oct/26 7:25 AM,,,0,"*User Story:*
+As a customer, I want an itemized view of missed payments, fees, and interest so that I can verify my arrears.
+
+*Business Value:*
+Increases transparency and reduces billing disputes.
+
+*Acceptance Criteria:*
+Clicking ""View Statement Details"" expands an itemized view of principal arrears, late fees, and interest. Selecting a line item shows transaction date, original due date, and fee description.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+Requires core transaction history API access. Maps to Camunda Step 2.1 (Itemized Debt View). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0003u:,,,,,10012,DRB-2,Account visibility,To Do,08/Oct/26 2:48 PM
+US-07: Representative Account Workspace,DRB-28,10038,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a representative, I want to view customer balances, plan statuses, and portal history so that I have context on calls.
+
+*Business Value:*
+Reduces duplicate checks and manual admin work (SO-06).
+
+*Acceptance Criteria:*
+Searching an Account ID displays balance, PTP commitments, dispute flags, and last login time. Customer portal actions update status flags in the activity feed in real time.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper), DEP-03 (Real-Time Ledger Status Flag Writing - Owner TBC)
+
+*Notes / Assumptions:*
+Rep interface covered in prototype deliverables. Maps to Camunda Frontline Swimlane (Rep Interaction History Workspace). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i00041:,,,,,10012,DRB-2,Account visibility,To Do,08/Oct/26 2:48 PM
+US-08: Outreach Activity Feed,DRB-29,10039,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a representative, I want to see a log of automated SMS and emails sent to the customer to avoid duplicate contact.
+
+*Business Value:*
+Prevents redundant communications and improves customer experience.
+
+*Acceptance Criteria:*
+Opening ""Outreach History"" shows a chronological list of sent messages, timestamps, and channels.
+
+*Dependencies:*
+DEP-04 (Enterprise SMS Gateway), DEP-01 (Core DB REST API)
+
+*Notes / Assumptions:*
+Logs pulled from central notification feed. Maps to Camunda Frontline Swimlane (Outreach Log Feed). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0004f:,,,,,10012,DRB-2,Account visibility,To Do,08/Oct/26 2:48 PM
+US-09: Self-Service Eligibility Filter,DRB-30,10040,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a product manager, I want the system to check account eligibility at login so ineligible users are redirected.
+
+*Business Value:*
+Enforces policy rules and protects restricted or vulnerable accounts.
+
+*Acceptance Criteria:*
+If self_service_eligible = false or legal_flag = true, hide payment options and display a support message.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+Rules managed in backend policy engine. Maps to Camunda Step 2.2 (Self-Service Policy Filter). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0004l:,,,,,10012,DRB-2,Account visibility,To Do,08/Oct/26 2:48 PM
+US-10: Payment Plan Selection,DRB-31,10041,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a customer, I want to choose from pre-approved monthly payment plans so that I can clear my balance over time.
+
+*Business Value:*
+Automates repayment agreements for eligible accounts (SO-03).
+
+*Acceptance Criteria:*
+Selecting ""Set Up Payment Plan"" calculates and shows 3 installment options (e.g., 3, 6, or 9 months). Selecting a plan proceeds to payment setup.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper), DEP-02 (Payment Gateway Integration - Owner TBC)
+
+*Notes / Assumptions:*
+Options calculated using standard business logic based on total arrears. Maps to Camunda Step 3 (Payment Plan Selection Engine). Estimated Eng Hours: 32.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},8,,0|i0004y:,,,,,10013,DRB-3,Promise-to-pay,To Do,08/Oct/26 2:48 PM
+US-11: Future-Dated Promise to Pay,DRB-32,10042,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 2:49 PM,,,0,"*User Story:*
+As a customer, I want to set a promise to pay on a future date (up to 30 days) so that I can schedule my payment.
+
+*Business Value:*
+Captures digital payment commitments to lower missed follow-up rates (SO-04).
+
+*Acceptance Criteria:*
+Selecting ""Promise to Pay Later"" submits a date (within 30 days) and amount via POST /api/v1/commitments/ptp. On success, sets ptp_active = true, updates ptp_due_date in the ledger via DEP-03, and sends an SMS confirmation.
+
+*Dependencies:*
+DEP-01 (Core DB REST API), DEP-03 (Ledger Flag Writing), DEP-04 (SMS Gateway)
+
+*Notes / Assumptions:*
+Future date restricted to 30 days per policy. Maps to Camunda Step 3.1 (P2P Commitment Gateway). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i00056:,,,,,10013,DRB-3,Promise-to-pay,To Do,08/Oct/26 2:48 PM
+US-12: Card Payment Processing,DRB-33,10043,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a customer, I want to securely enter card details so that I can pay immediately or set up plan installments.
+
+*Business Value:*
+Enables direct payment collection via secure card tokenization.
+
+*Acceptance Criteria:*
+Embeds PCI-compliant Payment Gateway iFrame (DEP-02) for card input. Upon authorization, displays receipt and logs payment in core ledger.
+
+*Dependencies:*
+DEP-02 (Payment Gateway Integration - Owner TBC), DEP-01 (Core DB REST API)
+
+*Notes / Assumptions:*
+Portal does not store card numbers. Maps to Camunda Step 3.2 (PCI Payment Gateway iFrame). Estimated Eng Hours: 32.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},8,,0|i0005i:,,,,,10013,DRB-3,Promise-to-pay,To Do,08/Oct/26 2:48 PM
+US-13: Plan & P2P Confirmations,DRB-34,10044,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a customer, I want written confirmation via email and SMS after setting up a plan or P2P date.
+
+*Business Value:*
+Provides written proof of agreement and reduces follow-up calls.
+
+*Acceptance Criteria:*
+Sends confirmation via email and SMS upon setting a payment plan or P2P. Failed dispatches log an error event in the customer feed.
+
+*Dependencies:*
+DEP-04 (Enterprise SMS Gateway - Owner TBC)
+
+*Notes / Assumptions:*
+Emails include installment schedule details. Maps to Camunda Step 3.3 (Notification Engine Dispatch). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0005m:,,,,,10013,DRB-3,Promise-to-pay,To Do,08/Oct/26 2:48 PM
+US-14: Outreach Suppression,DRB-35,10045,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a compliance officer, I want automated outreach paused immediately on disputes or hardship disclosures so that collections stop during reviews.
+
+*Business Value:*
+Maintains regulatory compliance during active disputes or hardship reviews.
+
+*Acceptance Criteria:*
+Dispute or hardship events set outreach_suppression = true in core ledgers within 2 seconds. Accounts with outreach_suppression = true are excluded from automated campaign lists.
+
+*Dependencies:*
+DEP-03 (Real-Time Ledger Status Flag Writing - Owner TBC)
+
+*Notes / Assumptions:*
+Suppression immediately halts active dialer lists. Maps to Camunda Step 4 (Outreach Suppression Event). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i0005x:,,,,,10014,DRB-4,Routing and exception handling,To Do,08/Oct/26 2:48 PM
+US-15: Dispute & Hardship Form,DRB-36,10046,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a customer, I want to submit a dispute or hardship form online so that my situation is recorded and collections are paused.
+
+*Business Value:*
+Provides self-service intake for vulnerable customers and ensures compliance.
+
+*Acceptance Criteria:*
+Submitting a ""Dispute Balance"" or ""Declare Hardship"" form records the reason code and statement. Submission sets dispute_flag or hardship_flag to true, enables outreach_suppression, and displays confirmation.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper), DEP-03 (Ledger Flag Writing)
+
+*Notes / Assumptions:*
+Captures standard dispute categories (e.g., Fraud, Incorrect Balance). Maps to Camunda Step 4.1 (Dispute & Hardship Intake Gateway). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i00060:,,,,,10014,DRB-4,Routing and exception handling,To Do,08/Oct/26 2:48 PM
+US-16: Exception Queue Routing,DRB-37,10047,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As an operations leader, I want dispute and hardship cases routed to specialist queues so that complex cases receive expert review.
+
+*Business Value:*
+Routes complex cases away from automated systems to trained staff (SO-05).
+
+*Acceptance Criteria:*
+Accounts with dispute_flag = 1 or hardship_flag = 1 are routed to Dispute_Specialists or Vulnerability_Team queues. Routing initiates an SLA tracking timer for the task.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper), Camunda 8 Workflow Engine Integration
+
+*Notes / Assumptions:*
+SLAs configured per category in workflow engine. Maps to Camunda Step 4.2 (Camunda Exception Routing Gateway). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i0006a:,,,,,10014,DRB-4,Routing and exception handling,To Do,08/Oct/26 2:48 PM
+US-17: SLA Callback Escalations,DRB-38,10048,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Medium,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a supervisor, I want overdue callback timers to escalate so that exception cases are handled promptly.
+
+*Business Value:*
+Prevents exception cases from stagnating in queues.
+
+*Acceptance Criteria:*
+Tasks nearing SLA limits display an ""Amber"" status indicator. Expired SLAs turn ""Red"" and escalate to the Team Leader queue.
+
+*Dependencies:*
+Camunda 8 Timer Boundary Events, DEP-03 (Ledger Flag Writing)
+
+*Notes / Assumptions:*
+Timer durations set in workflow engine. Maps to Camunda Step 4.3 (BPMN Boundary SLA Timer). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0006c:,,,,,10014,DRB-4,Routing and exception handling,To Do,08/Oct/26 2:48 PM
+US-18: Legal Review Handoff,DRB-39,10049,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a compliance director, I want unresolvable cases escalated for manager review so legal protocols can be applied.
+
+*Business Value:*
+Ensures legal action decisions are governed by manual specialist review.
+
+*Acceptance Criteria:*
+Unresolved exceptions escalate to a Manager Review task for evaluation. Toggling legal_flag = true suppresses self-service and exports the file to the legal team.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper), DEP-03 (Ledger Flag Writing)
+
+*Notes / Assumptions:*
+Implements portal handoff trigger for legal assessment. Maps to Camunda Step 4.4 (Manager Review & As-Is Legal Handoff). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0006l:,,,,,10014,DRB-4,Routing and exception handling,To Do,08/Oct/26 2:48 PM
+US-19: Real-Time Status Write-Back,DRB-40,10050,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As a finance analyst, I want portal actions to write status updates directly to core DB tables so ledger flags stay synchronized.
+
+*Business Value:*
+Resolves data sync issues and prevents recovery losses (DEP-03).
+
+*Acceptance Criteria:*
+Completed actions trigger PUT /api/v1/ledgers/flags to update database columns within 2 seconds. An HTTP 200 OK response commits the database transaction.
+
+*Dependencies:*
+DEP-03 (Real-Time Ledger Status Flag Writing - Owner TBC), DEP-01 (Core DB REST API Wrapper)
+
+*Notes / Assumptions:*
+Uses API write-backs without changing core schema structure. Maps to Camunda Step 5 (Core DB Status Flag API Write-back). Estimated Eng Hours: 20.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},5,,0|i0006m:,,,,,10015,DRB-5,Reporting and audit trail,To Do,08/Oct/26 2:48 PM
+US-20: Immutable Audit Logging,DRB-41,10051,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,High,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,,,,0,"*User Story:*
+As an auditor, I want every portal interaction saved as an immutable, timestamped log entry for full traceability.
+
+*Business Value:*
+Ensures complete compliance and auditable record-keeping.
+
+*Acceptance Criteria:*
+Portal actions log timestamp (UTC), Account ID, Actor ID, Action Code, IP, Old Value, and New Value. Logged entries are permanent and cannot be altered or removed.
+
+*Dependencies:*
+DEP-01 (Core DB REST API Wrapper - Owner TBC)
+
+*Notes / Assumptions:*
+Written to append-only compliance repository. Maps to Camunda Step 5.1 (Append-Only Compliance Audit Log). Estimated Eng Hours: 12.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},3,,0|i0006u:,,,,,10015,DRB-5,Reporting and audit trail,To Do,08/Oct/26 2:48 PM
+US-21: Conversion Telemetry,DRB-42,10052,Story,To Do,DRB,Debt Recovery Backlogs,software,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,Low,,,,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,08/Oct/26 2:48 PM,08/Oct/26 2:48 PM,08/Oct/26 3:11 PM,,,0,"*User Story:*
+As a product manager, I want completion rates tracked across funnel steps so that I can evaluate user journeys.
+
+*Business Value:*
+Provides telemetry data to measure and optimize user conversion.
+
+*Acceptance Criteria:*
+Telemetry logs user transitions through Auth, Summary, Plan Selection, and Confirmation steps. Exiting without completion triggers an ""Abandoned Funnel"" event with the last screen viewed.
+
+*Dependencies:*
+None (Frontend Analytics Integration)
+
+*Notes / Assumptions:*
+Telemetry data is anonymized and aggregated. Maps to Camunda Step 5.2 (Analytics Telemetry Tracker). Estimated Eng Hours: 8.",,Zakariah Hassan,712020:60848d52-fe92-41d8-9920-7ea28a4b065c,,,,,,,,,{},2,,0|i00079:,,,,,10015,DRB-5,Reporting and audit trail,To Do,08/Oct/26 2:48 PM

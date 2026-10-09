@@ -92,8 +92,8 @@
             <input type="radio" class="plan-radio-input" name="planDuration" value="3m">
             <div class="plan-radio-content">
               <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">3 Months</strong>
-              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-accent); margin: 0.25rem 0;">£413.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
-              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Shortest term &bull; Fast clearance &bull; Total £1,240.00</p>
+              <div class="plan-cost-3m" style="font-size: 1.6rem; font-weight: 800; color: var(--color-accent); margin: 0.25rem 0;">£413.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p class="plan-summary-3m" style="font-size: 0.8rem; color: var(--color-text-muted);">Shortest term &bull; Fast clearance &bull; Total £1,240.00</p>
             </div>
           </label>
 
@@ -103,8 +103,8 @@
             <div class="plan-radio-content">
               <span class="option-badge" style="font-size: 0.7rem;">Most Selected</span>
               <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">6 Months</strong>
-              <div style="font-size: 1.6rem; font-weight: 800; color: #2563eb; margin: 0.25rem 0;">£206.67<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
-              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Balanced monthly amount &bull; Total £1,240.00</p>
+              <div class="plan-cost-6m" style="font-size: 1.6rem; font-weight: 800; color: #2563eb; margin: 0.25rem 0;">£206.67<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p class="plan-summary-6m" style="font-size: 0.8rem; color: var(--color-text-muted);">Balanced monthly amount &bull; Total £1,240.00</p>
             </div>
           </label>
 
@@ -113,8 +113,8 @@
             <input type="radio" class="plan-radio-input" name="planDuration" value="9m">
             <div class="plan-radio-content">
               <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">9 Months</strong>
-              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£137.78<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
-              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Lower monthly impact &bull; Total £1,240.00</p>
+              <div class="plan-cost-9m" style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£137.78<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p class="plan-summary-9m" style="font-size: 0.8rem; color: var(--color-text-muted);">Lower monthly impact &bull; Total £1,240.00</p>
             </div>
           </label>
 
@@ -124,8 +124,8 @@
             <div class="plan-radio-content">
               <span class="option-badge" style="background:#fef3c7; color:#92400e; font-size: 0.7rem;">Maximum Term</span>
               <strong style="display: block; font-size: 1.15rem; color: var(--color-primary);">12 Months</strong>
-              <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£103.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
-              <p style="font-size: 0.8rem; color: var(--color-text-muted);">Lowest monthly payment &bull; Total £1,240.00</p>
+              <div class="plan-cost-12m" style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin: 0.25rem 0;">£103.33<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span></div>
+              <p class="plan-summary-12m" style="font-size: 0.8rem; color: var(--color-text-muted);">Lowest monthly payment &bull; Total £1,240.00</p>
             </div>
           </label>
         </div>
@@ -190,8 +190,36 @@
   <script src="session-timer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const state = window.LTBLedger.getState();
-      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+      const user = window.LTBLedger.getActiveUser();
+      const isPaid = user.isPaid || user.arrearsBalance <= 0;
+
+      // Update subtitle and plan costs based on user balance
+      document.getElementById('plan-header-subtitle').innerHTML = `Spread your overdue balance of <strong>£${user.arrearsBalance.toFixed(2)}</strong> into manageable monthly installments (up to 12 months).`;
+
+      const m3 = (user.arrearsBalance / 3).toFixed(2);
+      const m6 = (user.arrearsBalance / 6).toFixed(2);
+      const m9 = (user.arrearsBalance / 9).toFixed(2);
+      const m12 = (user.arrearsBalance / 12).toFixed(2);
+
+      const el3m = document.querySelector('.plan-cost-3m');
+      const el6m = document.querySelector('.plan-cost-6m');
+      const el9m = document.querySelector('.plan-cost-9m');
+      const el12m = document.querySelector('.plan-cost-12m');
+
+      if (el3m) el3m.innerHTML = `£${m3}<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span>`;
+      if (el6m) el6m.innerHTML = `£${m6}<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span>`;
+      if (el9m) el9m.innerHTML = `£${m9}<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span>`;
+      if (el12m) el12m.innerHTML = `£${m12}<span style="font-size: 0.85rem; font-weight: 400; color: var(--color-text-muted);">/mo</span>`;
+
+      const sum3m = document.querySelector('.plan-summary-3m');
+      const sum6m = document.querySelector('.plan-summary-6m');
+      const sum9m = document.querySelector('.plan-summary-9m');
+      const sum12m = document.querySelector('.plan-summary-12m');
+
+      if (sum3m) sum3m.textContent = `Shortest term • Fast clearance • Total £${user.arrearsBalance.toFixed(2)}`;
+      if (sum6m) sum6m.textContent = `Balanced monthly amount • Total £${user.arrearsBalance.toFixed(2)}`;
+      if (sum9m) sum9m.textContent = `Lower monthly impact • Total £${user.arrearsBalance.toFixed(2)}`;
+      if (sum12m) sum12m.textContent = `Lowest monthly payment • Total £${user.arrearsBalance.toFixed(2)}`;
 
       if (isPaid) {
         document.getElementById('plan-ineligible-zero-banner').style.display = 'block';

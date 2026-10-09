@@ -63,7 +63,7 @@
       <div class="alert alert-danger" style="display: flex; gap: 0.75rem; align-items: center;">
         <span style="font-size: 1.5rem;">⚠️</span>
         <div>
-          <strong>Attempt 2 of 3 Failed:</strong> You have <strong>1 attempt remaining</strong>. Entering an incorrect code one more time will place an automated 15-minute security hold on reference <strong>LTB-8849-2104</strong>.
+          <strong>Attempt 2 of 3 Failed:</strong> You have <strong>1 attempt remaining</strong>. Entering an incorrect code one more time will place an automated 15-minute security hold on reference <strong id="failed-acc-ref">LTB-8849-2104</strong>.
         </div>
       </div>
 
@@ -128,7 +128,21 @@
     </div>
   </footer>
 
-  <!-- 1-Minute Inactivity Session Manager -->
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
   <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.LTBLedger && window.LTBLedger.getActiveUser) {
+        const user = window.LTBLedger.getActiveUser();
+        if (user) {
+          const accEl = document.getElementById('failed-acc-ref');
+          const dobInput = document.getElementById('dob');
+          if (accEl) accEl.textContent = user.accountRef;
+          if (dobInput && user.dob) dobInput.value = user.dob;
+        }
+      }
+    });
+  </script>
 </body>
 </html>

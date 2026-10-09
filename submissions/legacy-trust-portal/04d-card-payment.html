@@ -64,8 +64,8 @@
         <div class="stat-box" style="margin-bottom: 0;">
           <div>
             <div class="stat-label">Total Payment Clearance Amount</div>
-            <div class="stat-amount" style="font-size: 2.2rem; color: var(--color-accent);">£1,240.00</div>
-            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+            <div class="stat-amount" id="pay-stat-amount" style="font-size: 2.2rem; color: var(--color-accent);">£1,240.00</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.25rem;" id="pay-stat-account">
               Account: <strong>LTB-8849-2104</strong> &bull; Settle in Full (Cycle 2 Arrears)
             </div>
           </div>
@@ -82,7 +82,7 @@
           <div class="card-meta-row">
             <div>
               <div style="font-size: 0.65rem; color: #cbd5e1; text-transform: uppercase;">Cardholder</div>
-              <div class="card-holder-name">SARAH M JENKINS</div>
+              <div class="card-holder-name" id="card-holder-preview">SARAH M JENKINS</div>
             </div>
             <div>
               <div style="font-size: 0.65rem; color: #cbd5e1; text-transform: uppercase;">Expires</div>
@@ -155,11 +155,23 @@
   <script src="session-timer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const state = window.LTBLedger.getState();
+      const user = window.LTBLedger.getActiveUser();
       const form = document.getElementById('ltb-payment-form');
       const submitBtn = document.getElementById('ltb-pay-submit-btn');
+      const cardNameInput = document.getElementById('cardholderName');
+      const cardPreview = document.getElementById('card-holder-preview');
+      const payStatAmount = document.getElementById('pay-stat-amount');
+      const payStatAccount = document.getElementById('pay-stat-account');
 
-      if (state.isPaid || state.arrearsBalance <= 0) {
+      if (user) {
+        if (cardNameInput) cardNameInput.value = user.borrowerName.toUpperCase();
+        if (cardPreview) cardPreview.textContent = user.borrowerName.toUpperCase();
+        if (payStatAmount) payStatAmount.textContent = '£' + user.arrearsBalance.toFixed(2);
+        if (payStatAccount) payStatAccount.innerHTML = `Account: <strong>${user.accountRef}</strong> &bull; Settle in Full (${user.cycle || 'Arrears'})`;
+        if (submitBtn) submitBtn.textContent = `Authorise & Pay £${user.arrearsBalance.toFixed(2)} Now →`;
+      }
+
+      if (user.isPaid || user.arrearsBalance <= 0) {
         submitBtn.disabled = true;
         submitBtn.style.opacity = '0.6';
         submitBtn.textContent = 'Account Already Paid in Full (£0.00)';
@@ -171,7 +183,7 @@
       } else {
         form.addEventListener('submit', function (e) {
           // Commit the payment to localStorage
-          window.LTBLedger.pay(state.arrearsBalance, 'Debit Card (•••• 4012)');
+          window.LTBLedger.pay(user.arrearsBalance, 'Debit Card (•••• 4012)');
           // Allow navigation to 05-confirmation.html
         });
       }

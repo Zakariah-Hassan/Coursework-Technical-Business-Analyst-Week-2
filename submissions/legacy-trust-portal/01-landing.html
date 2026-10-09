@@ -93,7 +93,75 @@
         </div>
       </div>
 
-      <form action="02-verify.html" method="get">
+      <!-- Quick Demo Customer Persona Switcher -->
+      <div style="background: #f8fafc; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <strong style="color: var(--color-primary); font-size: 0.95rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>👥</span> Select Demo Customer Persona:
+          </strong>
+          <span style="font-size: 0.78rem; color: var(--color-text-muted);">Click any profile below to pre-fill credentials &amp; switch account context</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;" id="persona-picker-grid">
+          <!-- Persona 1: Sarah Jenkins -->
+          <div class="persona-chip-card" data-ref="LTB-8849-2104" data-postcode="EC2A 4NE" style="border: 2px solid #2563eb; background: #eff6ff; border-radius: var(--radius-sm); padding: 0.75rem; cursor: pointer; transition: all 0.15s;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="font-size: 0.9rem; color: #1e3a8a;">Sarah M. Jenkins</strong>
+              <span style="font-size: 0.7rem; font-weight: 700; background: #dbeafe; color: #1e40af; padding: 0.15rem 0.4rem; border-radius: 3px;">Standard</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #334155; margin-top: 0.25rem;">
+              Overdue: <strong style="color: var(--color-danger);">£1,240.00</strong> &bull; 34 Days
+            </div>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace; margin-top: 0.2rem;">
+              LTB-8849-2104 (EC2A 4NE)
+            </div>
+          </div>
+
+          <!-- Persona 2: Marcus Vance -->
+          <div class="persona-chip-card" data-ref="LTB-4412-8809" data-postcode="M1 4BT" style="border: 1.5px solid var(--color-border); background: #ffffff; border-radius: var(--radius-sm); padding: 0.75rem; cursor: pointer; transition: all 0.15s;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="font-size: 0.9rem; color: #1e3a8a;">Marcus T. Vance</strong>
+              <span style="font-size: 0.7rem; font-weight: 700; background: #dcfce7; color: #166534; padding: 0.15rem 0.4rem; border-radius: 3px;">Pay in Full</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #334155; margin-top: 0.25rem;">
+              Overdue: <strong style="color: var(--color-danger);">£350.00</strong> &bull; 14 Days
+            </div>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace; margin-top: 0.2rem;">
+              LTB-4412-8809 (M1 4BT)
+            </div>
+          </div>
+
+          <!-- Persona 3: David O'Connor -->
+          <div class="persona-chip-card" data-ref="LTB-9901-3342" data-postcode="G1 2DH" style="border: 1.5px solid var(--color-border); background: #ffffff; border-radius: var(--radius-sm); padding: 0.75rem; cursor: pointer; transition: all 0.15s;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="font-size: 0.9rem; color: #1e3a8a;">David O'Connor</strong>
+              <span style="font-size: 0.7rem; font-weight: 700; background: #fef3c7; color: #92400e; padding: 0.15rem 0.4rem; border-radius: 3px;">Hardship</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #334155; margin-top: 0.25rem;">
+              Overdue: <strong style="color: var(--color-danger);">£2,800.00</strong> &bull; 62 Days
+            </div>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace; margin-top: 0.2rem;">
+              LTB-9901-3342 (G1 2DH)
+            </div>
+          </div>
+
+          <!-- Persona 4: Priya Sharma -->
+          <div class="persona-chip-card" data-ref="LTB-6720-5519" data-postcode="B1 1TT" style="border: 1.5px solid var(--color-border); background: #ffffff; border-radius: var(--radius-sm); padding: 0.75rem; cursor: pointer; transition: all 0.15s;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="font-size: 0.9rem; color: #1e3a8a;">Priya Sharma</strong>
+              <span style="font-size: 0.7rem; font-weight: 700; background: #fee2e2; color: #b91c1c; padding: 0.15rem 0.4rem; border-radius: 3px;">Dispute</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #334155; margin-top: 0.25rem;">
+              Overdue: <strong style="color: var(--color-danger);">£520.00</strong> &bull; 25 Days
+            </div>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace; margin-top: 0.2rem;">
+              LTB-6720-5519 (B1 1TT)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form id="landing-login-form" action="02-verify.html" method="get">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
           <div class="form-group">
             <label class="form-label" for="accountRef">Account or Notice Reference Number</label>
@@ -158,5 +226,59 @@
       </div>
     </div>
   </footer>
+
+  <!-- State & Persona Switcher Scripts -->
+  <script src="ledger-store.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cards = document.querySelectorAll('.persona-chip-card');
+      const accountInput = document.getElementById('accountRef');
+      const postcodeInput = document.getElementById('postcode');
+      const form = document.getElementById('landing-login-form');
+
+      function selectPersona(card) {
+        cards.forEach(c => {
+          c.style.border = '1.5px solid var(--color-border)';
+          c.style.background = '#ffffff';
+        });
+        card.style.border = '2px solid #2563eb';
+        card.style.background = '#eff6ff';
+
+        const ref = card.getAttribute('data-ref');
+        const pc = card.getAttribute('data-postcode');
+
+        if (accountInput) accountInput.value = ref;
+        if (postcodeInput) postcodeInput.value = pc;
+
+        if (window.LTBLedger && window.LTBLedger.setActiveUser) {
+          window.LTBLedger.setActiveUser(ref);
+        }
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', function () {
+          selectPersona(this);
+        });
+      });
+
+      // Synchronize on initial load
+      if (window.LTBLedger && window.LTBLedger.getActiveUser) {
+        const active = window.LTBLedger.getActiveUser();
+        if (active) {
+          const matchingCard = document.querySelector(`.persona-chip-card[data-ref="${active.accountRef}"]`);
+          if (matchingCard) {
+            selectPersona(matchingCard);
+          }
+        }
+      }
+
+      form.addEventListener('submit', function () {
+        const enteredRef = accountInput.value.trim();
+        if (window.LTBLedger && window.LTBLedger.setActiveUser) {
+          window.LTBLedger.setActiveUser(enteredRef);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

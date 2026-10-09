@@ -47,11 +47,11 @@
     <div style="background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; box-shadow: var(--shadow-xs);">
       <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: #334155;">
         <span style="display: inline-block; width: 8px; height: 8px; background: #2563eb; border-radius: 50%;"></span>
-        <span>Customer Account Ledger: <strong>LTB-8849-2104</strong> &bull; Balance: <strong id="rep-toolbar-balance" style="color: var(--color-danger);">£1,240.00</strong></span>
+        <span>Active Account: <strong id="rep-toolbar-ref">LTB-8849-2104</strong> &bull; (<span id="rep-toolbar-name">Sarah M. Jenkins</span>) &bull; Balance: <strong id="rep-toolbar-balance" style="color: var(--color-danger);">£1,240.00</strong></span>
       </div>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
         <button id="rep-btn-simulate-pay" type="button" class="btn btn-accent" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
-          💳 Simulate Payment (£1,240.00 &rarr; £0.00)
+          💳 Clear Balance (£ &rarr; £0.00)
         </button>
         <button id="rep-btn-simulate-hardship" type="button" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem; border-color: #f59e0b; color: #b45309;">
           ⚠️ Log Hardship Intake
@@ -60,7 +60,7 @@
           ⚖️ Log Balance Dispute
         </button>
         <button id="rep-btn-reset-ledger" type="button" class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;">
-          🔄 Reset Demo Ledger
+          🔄 Reset All Demo Data
         </button>
       </div>
     </div>
@@ -71,18 +71,26 @@
         <div>
           <label class="form-label" style="font-size: 0.85rem; text-transform: uppercase;">Search Core Ledger</label>
           <div style="display: flex; gap: 0.5rem;">
-            <input class="form-control" type="text" value="LTB-8849-2104" style="font-size: 0.9rem; padding: 0.5rem;">
-            <button class="btn btn-primary" style="padding: 0.5rem 0.75rem; font-size: 0.85rem;">Find</button>
+            <input class="form-control" type="text" id="rep-search-input" placeholder="Ref, Name or Postcode..." value="LTB-8849-2104" style="font-size: 0.85rem; padding: 0.5rem;">
+            <button class="btn btn-primary" id="rep-btn-search" style="padding: 0.5rem 0.75rem; font-size: 0.85rem;">Find</button>
+          </div>
+          <div style="margin-top: 0.6rem;">
+            <label class="form-label" style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted);">Quick Account Selector</label>
+            <select id="rep-account-select" class="form-control" style="font-size: 0.82rem; padding: 0.4rem; font-weight: 600;">
+              <!-- Dynamically populated -->
+            </select>
           </div>
         </div>
 
         <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;">
           <h3 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.75rem;">Account Snapshot</h3>
           <div style="font-size: 0.85rem; line-height: 1.8;">
-            <div><strong>Borrower:</strong> Sarah M. Jenkins</div>
-            <div><strong>DOB:</strong> 14/06/1985 (Verified ✓)</div>
-            <div><strong>Product:</strong> Unsecured Personal Loan</div>
-            <div><strong>Total Principal:</strong> £5,400.00</div>
+            <div><strong>Borrower:</strong> <span id="rep-snap-name">Sarah M. Jenkins</span></div>
+            <div><strong>DOB:</strong> <span id="rep-snap-dob">14/06/1985 (Verified ✓)</span></div>
+            <div><strong>Product:</strong> <span id="rep-snap-product">Unsecured Personal Loan</span></div>
+            <div><strong>Phone:</strong> <span id="rep-snap-phone">+44 7700 900492</span></div>
+            <div><strong>Address:</strong> <span id="rep-snap-address" style="font-size: 0.78rem; color:#475569;">14 Moorfields, London, EC2A 4NE</span></div>
+            <div><strong>Total Principal:</strong> <span id="rep-snap-principal">£5,400.00</span></div>
             <div><strong>Arrears Balance:</strong> <span id="rep-sidebar-arrears" style="color: var(--color-danger); font-weight: 700;">£1,240.00</span></div>
             <div><strong>Days Overdue:</strong> <span id="rep-sidebar-overdue">34 Days (Cycle 2)</span></div>
           </div>
@@ -141,15 +149,61 @@
       <section class="rep-content">
         <!-- Live Customer Context Card -->
         <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <h2 style="font-size: 1.25rem; color: var(--color-primary); margin-bottom: 0.25rem;">Active Customer Context: Sarah M. Jenkins</h2>
-              <p style="font-size: 0.85rem; color: var(--color-text-muted);">Last customer portal activity: <strong>Today at 10:42 UTC</strong> &bull; IP: 194.73.102.14 &bull; Channel: Self-Service Mobile Web</p>
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                <h2 style="font-size: 1.25rem; color: var(--color-primary); margin: 0;">Active Customer Context: <span id="rep-active-name">Sarah M. Jenkins</span></h2>
+                <span class="badge-flag flag-active" id="rep-active-status-badge">Self-Service Active</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0;">
+                Ref: <strong id="rep-active-ref">LTB-8849-2104</strong> &bull;
+                Last activity: <strong id="rep-active-last-act">Today at 10:42 UTC</strong> &bull;
+                IP: <span id="rep-active-ip">194.73.102.14</span> &bull;
+                Channel: <span id="rep-active-channel">Self-Service Mobile Web</span>
+              </p>
             </div>
-            <div style="display: flex; gap: 0.5rem;">
-              <a href="06-routed-representative.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">View Customer Handoff</a>
-              <button class="btn btn-primary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;" onclick="alert('Manual phone call initiated to +44 7700 900492.'); return false;">Initiate Outbound Call</button>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <a href="03-account-summary.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;" target="_blank" title="Open customer portal in new tab">
+                Open Customer View ↗
+              </a>
+              <button class="btn btn-primary" id="rep-btn-call" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">
+                Initiate Outbound Call
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Customer Account Directory (Live Multi-User Tracking Matrix) -->
+        <div class="card" style="margin-bottom: 0; padding: 1.5rem; border-top: 4px solid var(--color-primary);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <h3 style="font-size: 1.1rem; color: var(--color-primary);">
+                Collections Account Directory &amp; Multi-Persona Portfolio
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">
+                Live tracking across all customer personas. Real-time balance updates, disputes, and audit writebacks reflect dynamically.
+              </p>
+            </div>
+            <span class="badge-flag flag-active" id="directory-count-badge">4 Accounts Monitored</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="audit-table" id="directory-table">
+              <thead>
+                <tr>
+                  <th>Account Ref</th>
+                  <th>Borrower</th>
+                  <th>Product &amp; Location</th>
+                  <th>Arrears Balance</th>
+                  <th>Overdue</th>
+                  <th>Risk Profile / Scenario</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="directory-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -168,7 +222,7 @@
           </div>
 
           <div id="payments-empty-notice" style="background: #f8fafc; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem; text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">
-            No card payments recorded for current delinquent cycle. Outstanding arrears balance: <strong>£1,240.00</strong>.
+            No card payments recorded for current delinquent cycle. Outstanding arrears balance: <strong id="payments-empty-balance">£1,240.00</strong>.
           </div>
 
           <table class="audit-table" id="payments-table" style="display: none;">
@@ -288,76 +342,230 @@
   <script src="ledger-store.js"></script>
   <script>
     function renderRepWorkspace() {
-      const state = window.LTBLedger.getState();
-      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+      const user = window.LTBLedger.getActiveUser();
+      const allUsers = window.LTBLedger.getAllUsers();
+      if (!user) return;
 
-      // Toolbar and Snapshot
+      const isPaid = user.isPaid || user.arrearsBalance <= 0;
+
+      // 1. Toolbar update
+      document.getElementById('rep-toolbar-ref').textContent = user.accountRef;
+      document.getElementById('rep-toolbar-name').textContent = user.borrowerName;
       const toolbarBalance = document.getElementById('rep-toolbar-balance');
+      const btnSimPay = document.getElementById('rep-btn-simulate-pay');
+
+      if (isPaid) {
+        toolbarBalance.textContent = '£0.00 (Cleared ✓)';
+        toolbarBalance.style.color = '#16a34a';
+        btnSimPay.textContent = '💳 Balance Cleared (£0.00)';
+        btnSimPay.disabled = true;
+        btnSimPay.style.opacity = '0.6';
+      } else {
+        toolbarBalance.textContent = '£' + user.arrearsBalance.toFixed(2);
+        toolbarBalance.style.color = 'var(--color-danger)';
+        btnSimPay.textContent = '💳 Clear Balance (£' + user.arrearsBalance.toFixed(2) + ' → £0.00)';
+        btnSimPay.disabled = false;
+        btnSimPay.style.opacity = '1';
+      }
+
+      // 2. Sidebar Account Selector sync
+      const accountSelect = document.getElementById('rep-account-select');
+      accountSelect.innerHTML = '';
+      allUsers.forEach(u => {
+        const opt = document.createElement('option');
+        opt.value = u.accountRef;
+        const balLabel = (u.isPaid || u.arrearsBalance <= 0) ? '£0.00 [CLEARED]' : '£' + u.arrearsBalance.toFixed(2);
+        opt.textContent = `${u.borrowerName} (${u.accountRef}) - ${balLabel}`;
+        if (u.accountRef === user.accountRef) opt.selected = true;
+        accountSelect.appendChild(opt);
+      });
+
+      // 3. Sidebar Snapshot
+      document.getElementById('rep-snap-name').textContent = user.borrowerName;
+      document.getElementById('rep-snap-dob').textContent = (user.dobDisplay || user.dob) + ' (Verified ✓)';
+      document.getElementById('rep-snap-product').textContent = user.product;
+      document.getElementById('rep-snap-phone').textContent = user.phone;
+      document.getElementById('rep-snap-address').textContent = user.address;
+      document.getElementById('rep-snap-principal').textContent = '£' + (user.totalPrincipal ? user.totalPrincipal.toLocaleString('en-GB', {minimumFractionDigits: 2}) : '0.00');
+
       const sidebarArrears = document.getElementById('rep-sidebar-arrears');
       const sidebarOverdue = document.getElementById('rep-sidebar-overdue');
 
       if (isPaid) {
-        toolbarBalance.textContent = '£0.00 (Paid in Full)';
-        toolbarBalance.style.color = '#16a34a';
-
         sidebarArrears.textContent = '£0.00 (Cleared ✓)';
         sidebarArrears.style.color = '#16a34a';
-
         sidebarOverdue.textContent = '0 Days (Up to Date)';
         sidebarOverdue.style.color = '#16a34a';
-
-        document.getElementById('rep-flag-ptp').textContent = 'FALSE (0 - Cleared)';
-        document.getElementById('rep-flag-ptp').className = 'badge-flag';
-        document.getElementById('rep-flag-ptp').style.background = '#e2e8f0';
-        document.getElementById('rep-flag-ptp').style.color = '#475569';
-
-        document.getElementById('rep-flag-paid').textContent = 'TRUE (Paid £1,240.00)';
-        document.getElementById('rep-flag-paid').className = 'badge-flag flag-active';
-
-        document.getElementById('rep-flag-settled').textContent = 'TRUE (1 - Good Standing)';
-        document.getElementById('rep-flag-settled').className = 'badge-flag flag-active';
-
-        document.getElementById('rep-flag-suppress').textContent = 'TRUE (Account Settled)';
       } else {
-        toolbarBalance.textContent = '£1,240.00';
-        toolbarBalance.style.color = '#b42318';
-
-        sidebarArrears.textContent = '£1,240.00';
-        sidebarArrears.style.color = '#b42318';
-
-        sidebarOverdue.textContent = '34 Days (Cycle 2)';
+        sidebarArrears.textContent = '£' + user.arrearsBalance.toFixed(2);
+        sidebarArrears.style.color = 'var(--color-danger)';
+        sidebarOverdue.textContent = user.daysOverdue + ' Days (' + user.cycle + ')';
         sidebarOverdue.style.color = 'inherit';
-
-        document.getElementById('rep-flag-ptp').textContent = 'TRUE (30d active)';
-        document.getElementById('rep-flag-ptp').className = 'badge-flag flag-active';
-
-        document.getElementById('rep-flag-paid').textContent = 'FALSE (£0.00)';
-        document.getElementById('rep-flag-paid').className = 'badge-flag';
-        document.getElementById('rep-flag-paid').style.background = '#e2e8f0';
-        document.getElementById('rep-flag-paid').style.color = '#475569';
-
-        document.getElementById('rep-flag-settled').textContent = 'FALSE (0)';
-        document.getElementById('rep-flag-settled').className = 'badge-flag';
-        document.getElementById('rep-flag-settled').style.background = '#e2e8f0';
-        document.getElementById('rep-flag-settled').style.color = '#475569';
-
-        document.getElementById('rep-flag-suppress').textContent = 'TRUE (Suppressed)';
       }
 
-      // Render Recorded Payments Table
+      // 4. Sidebar Core Flags
+      const flagEligible = document.getElementById('rep-flag-eligible');
+      const isEligible = user.flags ? user.flags.self_service_eligible : true;
+      if (flagEligible) {
+        flagEligible.textContent = isEligible ? 'TRUE (1)' : 'FALSE (0 - Ineligible)';
+        flagEligible.className = isEligible ? 'badge-flag flag-active' : 'badge-flag';
+        flagEligible.style.background = isEligible ? '#dcfce7' : '#fee2e2';
+        flagEligible.style.color = isEligible ? '#166534' : '#b91c1c';
+      }
+
+      const flagPtp = document.getElementById('rep-flag-ptp');
+      const ptpActive = user.flags ? user.flags.ptp_active : false;
+      if (isPaid) {
+        flagPtp.textContent = 'FALSE (0 - Cleared)';
+        flagPtp.className = 'badge-flag';
+        flagPtp.style.background = '#e2e8f0';
+        flagPtp.style.color = '#475569';
+      } else {
+        flagPtp.textContent = ptpActive ? 'TRUE (30d active)' : 'FALSE (0)';
+        flagPtp.className = ptpActive ? 'badge-flag flag-active' : 'badge-flag';
+        flagPtp.style.background = ptpActive ? '#dcfce7' : '#e2e8f0';
+        flagPtp.style.color = ptpActive ? '#166534' : '#475569';
+      }
+
+      const flagPaid = document.getElementById('rep-flag-paid');
+      if (isPaid) {
+        flagPaid.textContent = 'TRUE (Paid In Full)';
+        flagPaid.className = 'badge-flag flag-active';
+        flagPaid.style.background = '#dcfce7';
+        flagPaid.style.color = '#166534';
+      } else {
+        flagPaid.textContent = 'FALSE (£0.00)';
+        flagPaid.className = 'badge-flag';
+        flagPaid.style.background = '#e2e8f0';
+        flagPaid.style.color = '#475569';
+      }
+
+      const flagSettled = document.getElementById('rep-flag-settled');
+      if (isPaid) {
+        flagSettled.textContent = 'TRUE (1 - Good Standing)';
+        flagSettled.className = 'badge-flag flag-active';
+        flagSettled.style.background = '#dcfce7';
+        flagSettled.style.color = '#166534';
+      } else {
+        flagSettled.textContent = 'FALSE (0)';
+        flagSettled.className = 'badge-flag';
+        flagSettled.style.background = '#e2e8f0';
+        flagSettled.style.color = '#475569';
+      }
+
+      const flagSuppress = document.getElementById('rep-flag-suppress');
+      const outreachSuppressed = user.flags ? user.flags.outreach_suppression : true;
+      if (isPaid) {
+        flagSuppress.textContent = 'TRUE (Account Settled)';
+        flagSuppress.className = 'badge-flag flag-suppressed';
+      } else if (outreachSuppressed) {
+        flagSuppress.textContent = 'TRUE (Suppressed)';
+        flagSuppress.className = 'badge-flag flag-suppressed';
+      } else {
+        flagSuppress.textContent = 'FALSE (Dialer Active)';
+        flagSuppress.className = 'badge-flag';
+        flagSuppress.style.background = '#e2e8f0';
+        flagSuppress.style.color = '#475569';
+      }
+
+      const cases = user.disputesAndHardships || [];
+      const hasOpenHardship = cases.some(c => c.category === 'Financial Hardship') || (user.flags && user.flags.hardship_flag);
+      const hasOpenDispute = cases.some(c => c.category === 'Balance Dispute') || (user.flags && user.flags.dispute_flag);
+
+      const flagHardship = document.getElementById('rep-flag-hardship');
+      flagHardship.textContent = hasOpenHardship ? 'ACTIVE (30d Hold)' : 'FALSE (0)';
+      flagHardship.className = hasOpenHardship ? 'badge-flag flag-pending' : 'badge-flag';
+      flagHardship.style.background = hasOpenHardship ? '#fef3c7' : '#e2e8f0';
+      flagHardship.style.color = hasOpenHardship ? '#92400e' : '#475569';
+
+      const flagDispute = document.getElementById('rep-flag-dispute');
+      flagDispute.textContent = hasOpenDispute ? 'REVIEW PENDING' : 'FALSE (0)';
+      flagDispute.className = hasOpenDispute ? 'badge-flag flag-pending' : 'badge-flag';
+      flagDispute.style.background = hasOpenDispute ? '#fee2e2' : '#e2e8f0';
+      flagDispute.style.color = hasOpenDispute ? '#b91c1c' : '#475569';
+
+      const flagLegal = document.getElementById('rep-flag-legal');
+      const legalFlag = user.flags ? user.flags.legal_flag : false;
+      if (flagLegal) {
+        flagLegal.textContent = legalFlag ? 'TRUE (Pre-Legal Hold)' : 'FALSE (0)';
+        flagLegal.style.background = legalFlag ? '#fee2e2' : '#e2e8f0';
+        flagLegal.style.color = legalFlag ? '#b91c1c' : '#475569';
+      }
+
+      // 5. Active Customer Context Header
+      document.getElementById('rep-active-name').textContent = user.borrowerName;
+      document.getElementById('rep-active-ref').textContent = user.accountRef;
+      document.getElementById('rep-active-last-act').textContent = isPaid ? 'Just now (Payment Processed)' : 'Today at 10:42 UTC';
+      document.getElementById('rep-active-ip').textContent = '194.73.102.' + (parseInt(user.accountRef.slice(-2)) || 14);
+      document.getElementById('rep-active-channel').textContent = 'Self-Service Mobile Web';
+
+      const statusBadge = document.getElementById('rep-active-status-badge');
+      if (isPaid) {
+        statusBadge.textContent = 'Account Cleared & In Good Standing';
+        statusBadge.style.background = '#dcfce7';
+        statusBadge.style.color = '#166534';
+      } else {
+        statusBadge.textContent = user.personaBadge || 'Active Collections Queue';
+        statusBadge.style.background = '#e0f2fe';
+        statusBadge.style.color = '#0369a1';
+      }
+
+      // 6. Account Directory Table
+      const dirBody = document.getElementById('directory-table-body');
+      dirBody.innerHTML = '';
+      allUsers.forEach(u => {
+        const row = document.createElement('tr');
+        const isActive = u.accountRef === user.accountRef;
+        if (isActive) {
+          row.style.background = '#f0f9ff';
+          row.style.borderLeft = '3px solid #0284c7';
+        }
+        const uPaid = u.isPaid || u.arrearsBalance <= 0;
+        const balDisplay = uPaid
+          ? `<strong style="color: #16a34a;">£0.00</strong> <span class="badge-flag" style="background:#dcfce7; color:#166534; font-size:0.7rem;">CLEARED</span>`
+          : `<strong style="color: #b91c1c;">£${u.arrearsBalance.toFixed(2)}</strong>`;
+
+        row.innerHTML = `
+          <td><strong>${u.accountRef}</strong></td>
+          <td><strong>${u.borrowerName}</strong></td>
+          <td>${u.product}<br><span style="font-size:0.75rem; color:#64748b;">${u.postcode}</span></td>
+          <td>${balDisplay}</td>
+          <td>${uPaid ? '<span style="color:#16a34a; font-weight:600;">0 Days</span>' : u.daysOverdue + ' Days'}</td>
+          <td><span class="badge-flag" style="font-size:0.75rem; background:#f1f5f9; color:#334155;">${u.personaBadge}</span></td>
+          <td>
+            <button class="btn ${isActive ? 'btn-primary' : 'btn-outline'} btn-sm rep-switch-btn" data-ref="${u.accountRef}" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">
+              ${isActive ? '✓ Inspecting' : 'Inspect & Track'}
+            </button>
+          </td>
+        `;
+        dirBody.appendChild(row);
+      });
+
+      // Attach inspect buttons in directory
+      document.querySelectorAll('.rep-switch-btn').forEach(b => {
+        b.addEventListener('click', function () {
+          const ref = this.getAttribute('data-ref');
+          window.LTBLedger.setActiveUser(ref);
+          document.getElementById('rep-search-input').value = ref;
+          renderRepWorkspace();
+        });
+      });
+
+      // 7. Recorded Payments Table
       const paymentsTable = document.getElementById('payments-table');
       const paymentsBody = document.getElementById('payments-table-body');
       const emptyNotice = document.getElementById('payments-empty-notice');
+      const emptyBalance = document.getElementById('payments-empty-balance');
       const countBadge = document.getElementById('payments-count-badge');
 
       paymentsBody.innerHTML = '';
 
-      if (state.payments && state.payments.length > 0) {
+      if (user.payments && user.payments.length > 0) {
         paymentsTable.style.display = 'table';
         emptyNotice.style.display = 'none';
-        countBadge.textContent = state.payments.length + ' Payment(s) Recorded';
+        countBadge.textContent = user.payments.length + ' Payment(s) Recorded';
 
-        state.payments.forEach(p => {
+        user.payments.forEach(p => {
           const row = document.createElement('tr');
           row.style.background = '#f0fdf4';
           row.innerHTML = `
@@ -365,7 +573,7 @@
             <td><strong>${p.timestamp}</strong><br><span style="font-size:0.75rem; color:#64748b;">${p.displayTime}</span></td>
             <td><span style="font-size:1.1rem; font-weight:800; color:#166534;">£${p.amount.toFixed(2)}</span></td>
             <td><span class="badge-flag" style="background:#dcfce7; color:#166534;">${p.method}</span></td>
-            <td>£1,200.00 Principal + £40.00 Late Surcharges Cleared</td>
+            <td>£${(p.amount * 0.95).toFixed(2)} Principal + £${(p.amount * 0.05).toFixed(2)} Charges Cleared</td>
             <td><span class="badge-flag flag-active">SETTLED &amp; COMMITTED</span></td>
           `;
           paymentsBody.appendChild(row);
@@ -373,26 +581,22 @@
       } else {
         paymentsTable.style.display = 'none';
         emptyNotice.style.display = 'block';
+        emptyBalance.textContent = '£' + user.arrearsBalance.toFixed(2);
         countBadge.textContent = '0 Payments Recorded';
       }
 
-      // Render Recorded Disputes & Hardship Cases Table
+      // 8. Recorded Disputes & Hardships Table
       const disputesBody = document.getElementById('disputes-table-body');
       const disputesCountBadge = document.getElementById('disputes-count-badge');
       disputesBody.innerHTML = '';
 
-      const cases = state.disputesAndHardships || [];
       disputesCountBadge.textContent = cases.length + ' Case(s) Logged';
 
       cases.forEach(c => {
         const isHardship = (c.category === 'Financial Hardship');
         const badgeStyle = isHardship ? 'background:#fef3c7; color:#92400e;' : 'background:#fee2e2; color:#b91c1c;';
         const row = document.createElement('tr');
-        if (isHardship) {
-          row.style.background = '#fffdf5';
-        } else {
-          row.style.background = '#fffafa';
-        }
+        row.style.background = isHardship ? '#fffdf5' : '#fffafa';
         row.innerHTML = `
           <td><strong>${c.caseId}</strong><br><code style="font-size:0.75rem; color:#2563eb;">${c.token}</code></td>
           <td><strong>${c.timestamp}</strong><br><span style="font-size:0.75rem; color:#64748b;">${c.displayTime}</span></td>
@@ -405,30 +609,10 @@
         disputesBody.appendChild(row);
       });
 
-      // Update Hardship & Dispute Flags in Sidebar
-      const hardshipFlagEl = document.getElementById('rep-flag-hardship');
-      const disputeFlagEl = document.getElementById('rep-flag-dispute');
-      const hasOpenHardship = cases.some(c => c.category === 'Financial Hardship');
-      const hasOpenDispute = cases.some(c => c.category === 'Balance Dispute');
-
-      if (hardshipFlagEl) {
-        hardshipFlagEl.textContent = hasOpenHardship ? 'TRUE (30d Hold Active)' : 'FALSE (0)';
-        hardshipFlagEl.className = hasOpenHardship ? 'badge-flag flag-pending' : 'badge-flag';
-        hardshipFlagEl.style.background = hasOpenHardship ? '#fef3c7' : '#e2e8f0';
-        hardshipFlagEl.style.color = hasOpenHardship ? '#92400e' : '#475569';
-      }
-
-      if (disputeFlagEl) {
-        disputeFlagEl.textContent = hasOpenDispute ? 'TRUE (Investigation Open)' : 'FALSE (0)';
-        disputeFlagEl.className = hasOpenDispute ? 'badge-flag flag-pending' : 'badge-flag';
-        disputeFlagEl.style.background = hasOpenDispute ? '#fee2e2' : '#e2e8f0';
-        disputeFlagEl.style.color = hasOpenDispute ? '#b91c1c' : '#475569';
-      }
-
-      // Render Outreach Activity Feed
+      // 9. Outreach Feed
       const outreachBody = document.getElementById('outreach-table-body');
       outreachBody.innerHTML = '';
-      state.outreachFeed.forEach(item => {
+      (user.outreachFeed || []).forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${item.timestamp}</td>
@@ -439,10 +623,10 @@
         outreachBody.appendChild(row);
       });
 
-      // Render Pre-filled Compliance Audit Trail
+      // 10. Pre-filled and Live Audit Logs
       const auditBody = document.getElementById('audit-table-body');
       auditBody.innerHTML = '';
-      state.auditLogs.forEach(entry => {
+      (user.auditLogs || []).forEach(entry => {
         const row = document.createElement('tr');
         const isPayment = entry.action === 'CARD_SETTLEMENT_FULL' || entry.action === 'STATUS_WRITEBACK';
         const isHardship = entry.action.includes('HARDSHIP');
@@ -479,15 +663,47 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderRepWorkspace();
 
-      // Simulate Payment
-      document.getElementById('rep-btn-simulate-pay').addEventListener('click', function () {
-        window.LTBLedger.pay(1240.00, 'Debit Card (•••• 4012)');
+      // Quick Account Selector dropdown
+      document.getElementById('rep-account-select').addEventListener('change', function () {
+        const ref = this.value;
+        window.LTBLedger.setActiveUser(ref);
+        document.getElementById('rep-search-input').value = ref;
         renderRepWorkspace();
       });
 
-      // Simulate Hardship
+      // Search button and search on Enter
+      function performSearch() {
+        const query = document.getElementById('rep-search-input').value.trim();
+        if (!query) return;
+        const match = window.LTBLedger.findUser(query);
+        if (match) {
+          window.LTBLedger.setActiveUser(match.accountRef);
+          renderRepWorkspace();
+        } else {
+          alert('No customer account found matching: "' + query + '". Try "Sarah", "Marcus", "David", "Priya", or a postcode like "M4 1PQ".');
+        }
+      }
+
+      document.getElementById('rep-btn-search').addEventListener('click', performSearch);
+      document.getElementById('rep-search-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+      });
+
+      // Simulate Payment for active user
+      document.getElementById('rep-btn-simulate-pay').addEventListener('click', function () {
+        const user = window.LTBLedger.getActiveUser();
+        if (user && user.arrearsBalance > 0) {
+          window.LTBLedger.executePayment(user.arrearsBalance, 'Representative Virtual POS (•••• 4012)');
+          renderRepWorkspace();
+        }
+      });
+
+      // Simulate Hardship for active user
       document.getElementById('rep-btn-simulate-hardship').addEventListener('click', function () {
-        window.LTBLedger.logDisputeOrHardship(
+        window.LTBLedger.executeDisputeOrHardship(
           'hardship',
           'HARDSHIP_HEALTH (Medical Crisis)',
           'Customer reported emergency hospital admission and loss of household earnings. Requested 30-day statutory breathing space hold.'
@@ -495,9 +711,9 @@
         renderRepWorkspace();
       });
 
-      // Simulate Dispute
+      // Simulate Dispute for active user
       document.getElementById('rep-btn-simulate-dispute').addEventListener('click', function () {
-        window.LTBLedger.logDisputeOrHardship(
+        window.LTBLedger.executeDisputeOrHardship(
           'dispute',
           'ERR_CALC (Contested Payment Credit)',
           'Customer asserts uncredited bank transfer of £600 on 01 August. Contesting late surcharge assessment.'
@@ -505,10 +721,20 @@
         renderRepWorkspace();
       });
 
-      // Reset Ledger
+      // Reset All Demo Data
       document.getElementById('rep-btn-reset-ledger').addEventListener('click', function () {
-        window.LTBLedger.resetState();
-        renderRepWorkspace();
+        if (confirm('Reset all demo personas back to default baseline?')) {
+          window.LTBLedger.resetAllData();
+          renderRepWorkspace();
+        }
+      });
+
+      // Initiate outbound call
+      document.getElementById('rep-btn-call').addEventListener('click', function () {
+        const user = window.LTBLedger.getActiveUser();
+        if (user) {
+          alert('Initiating outbound telephone call to ' + user.borrowerName + ' at ' + user.phoneNumber + '...');
+        }
       });
     });
   </script>

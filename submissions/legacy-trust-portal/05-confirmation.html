@@ -83,11 +83,11 @@
         <ul style="list-style: none; padding-left: 0; line-height: 2.1; font-size: 0.95rem;">
           <li style="display: flex; justify-content: space-between;">
             <span style="color: var(--color-text-muted);">Account Holder:</span>
-            <strong>Sarah M. Jenkins</strong>
+            <strong id="conf-holder-name">Sarah M. Jenkins</strong>
           </li>
           <li style="display: flex; justify-content: space-between;">
             <span style="color: var(--color-text-muted);">Account Reference:</span>
-            <strong>LTB-8849-2104</strong>
+            <strong id="conf-account-ref">LTB-8849-2104</strong>
           </li>
           <li style="display: flex; justify-content: space-between;">
             <span style="color: var(--color-text-muted);">Arrangement Type:</span>
@@ -95,14 +95,14 @@
           </li>
           <li style="display: flex; justify-content: space-between;">
             <span style="color: var(--color-text-muted);">Customer Notifications Dispatched:</span>
-            <strong style="color: var(--color-accent);">✓ SMS sent to •••• 4921 &bull; ✓ Email sent to s***@outlook.com</strong>
+            <strong style="color: var(--color-accent);" id="conf-dispatch-text">✓ SMS sent to •••• 4921 &bull; ✓ Email sent to s***@outlook.com</strong>
           </li>
           <li style="display: flex; justify-content: space-between;">
             <span style="color: var(--color-text-muted);">Core Ledger Verification Hash:</span>
             <code style="font-size: 0.8rem; background: #e2e8f0; padding: 0.15rem 0.5rem; border-radius: 4px; font-family: monospace;">sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1f</code>
           </li>
           <li style="display: flex; justify-content: space-between; border-top: 1px dashed var(--color-border); padding-top: 0.75rem; margin-top: 0.75rem;">
-            <span style="color: var(--color-text-muted); font-weight: 600;">Amount Settled Today:</span>
+            <span style="color: var(--color-text-muted); font-weight: 600;" id="conf-amount-label">Amount Settled Today:</span>
             <strong style="color: var(--color-accent); font-size: 1.25rem;" id="conf-amount-paid">£1,240.00</strong>
           </li>
           <li style="display: flex; justify-content: space-between;" id="conf-balance-row">
@@ -151,13 +151,38 @@
   <script src="session-timer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const state = window.LTBLedger.getState();
-      const isCardPayment = window.location.search.includes('type=card-payment') || state.isPaid;
+      const user = window.LTBLedger.getActiveUser();
+      const isCardPayment = window.location.search.includes('type=card-payment') || user.isPaid;
+      const isPtp = window.location.search.includes('type=ptp');
+      const isPlan = window.location.search.includes('type=plan');
+      const isAppt = window.location.search.includes('type=appointment');
+
+      if (user) {
+        document.getElementById('conf-holder-name').textContent = user.borrowerName;
+        document.getElementById('conf-account-ref').textContent = user.accountRef;
+        document.getElementById('conf-dispatch-text').innerHTML = `✓ SMS sent to ${user.phoneMasked || '•••• 4921'} &bull; ✓ Email sent to ${user.email || 'customer@legacytrust.co.uk'}`;
+      }
 
       if (isCardPayment) {
         document.getElementById('conf-arrangement-type').textContent = 'Direct Card Settlement (Paid in Full)';
-        document.getElementById('conf-amount-paid').textContent = '£1,240.00';
+        document.getElementById('conf-amount-label').textContent = 'Amount Settled Today:';
+        document.getElementById('conf-amount-paid').textContent = '£' + (user.initialArrears || 1240).toFixed(2);
         document.getElementById('conf-remaining-balance').textContent = '£0.00 (Cleared)';
+      } else if (isPtp) {
+        document.getElementById('conf-arrangement-type').textContent = 'Digital Promise to Pay (30-Day Commitment)';
+        document.getElementById('conf-amount-label').textContent = 'Promised Amount:';
+        document.getElementById('conf-amount-paid').textContent = '£' + user.arrearsBalance.toFixed(2);
+        document.getElementById('conf-remaining-balance').textContent = '£' + user.arrearsBalance.toFixed(2) + ' (Hold Active)';
+      } else if (isPlan) {
+        document.getElementById('conf-arrangement-type').textContent = 'Monthly Installment Payment Schedule';
+        document.getElementById('conf-amount-label').textContent = 'Total Plan Value:';
+        document.getElementById('conf-amount-paid').textContent = '£' + user.arrearsBalance.toFixed(2);
+        document.getElementById('conf-remaining-balance').textContent = 'Spread into Agreed Monthly Direct Debits';
+      } else if (isAppt) {
+        document.getElementById('conf-arrangement-type').textContent = 'Scheduled Telephone Consultation (20 Mins)';
+        document.getElementById('conf-amount-label').textContent = 'Case Under Review:';
+        document.getElementById('conf-amount-paid').textContent = '£' + user.arrearsBalance.toFixed(2);
+        document.getElementById('conf-remaining-balance').textContent = 'Temporary 7-Day Protection Hold Placed';
       }
     });
   </script>

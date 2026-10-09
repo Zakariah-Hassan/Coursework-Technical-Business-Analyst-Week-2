@@ -31,7 +31,7 @@
         <div class="brand-title">Legacy Trust Bank</div>
       </a>
       <div class="header-security-badge">
-        <span>👤 Verified Customer: Sarah M. Jenkins &bull; Active Portal Session</span>
+        <span id="summary-header-user">👤 Verified Customer: Sarah M. Jenkins &bull; Active Portal Session</span>
       </div>
     </div>
   </header>
@@ -250,15 +250,22 @@
   <script src="session-timer.js"></script>
   <script>
     function renderSummaryState() {
-      const state = window.LTBLedger.getState();
-      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+      const user = window.LTBLedger.getActiveUser();
+      const isPaid = user.isPaid || user.arrearsBalance <= 0;
+
+      // Update Header & Subtitle
+      document.getElementById('summary-header-user').textContent = `👤 Verified Customer: ${user.borrowerName} • Active Portal Session`;
+      document.querySelector('#account-summary-card .card-subtitle').innerHTML = `${user.product} &bull; Account Reference: <strong>${user.accountRef}</strong>`;
 
       // Update Top Simulation Bar
-      document.getElementById('demo-balance-text').textContent = '£' + state.arrearsBalance.toFixed(2);
+      document.getElementById('demo-balance-text').textContent = '£' + user.arrearsBalance.toFixed(2);
       document.getElementById('demo-balance-text').style.color = isPaid ? '#027a48' : '#b42318';
+      document.getElementById('btn-quick-pay').textContent = `Pay Remaining Balance Now (£${user.arrearsBalance.toFixed(2)} → £0.00)`;
+      document.getElementById('btn-reset-ledger').textContent = `Reset to Overdue (£${user.initialArrears.toFixed(2)})`;
 
       // Update Stat Box & Legend
       const statAmount = document.getElementById('stat-arrears-amount');
+      const statPrincipal = document.getElementById('stat-principal-text');
       const ratioText = document.getElementById('debt-ratio-text');
       const barOverdue = document.getElementById('bar-overdue');
       const barRemaining = document.getElementById('bar-remaining');
@@ -268,6 +275,37 @@
       const statementTotal = document.getElementById('statement-total-amount');
       const creditRow = document.getElementById('settlement-credit-row');
       const paidBanner = document.getElementById('paid-in-full-banner');
+      const statementTbody = document.getElementById('statement-rows');
+
+      statPrincipal.innerHTML = `Total Loan Principal Remaining: <strong>£${user.totalPrincipal.toFixed(2)}</strong> &bull; Overdue Cycle: <strong>${user.cycle || 'Active Arrears'}</strong>`;
+
+      // Render User Specific Statement Items
+      if (user.statementItems && user.statementItems.length > 0) {
+        let rowsHtml = '';
+        user.statementItems.forEach(item => {
+          rowsHtml += `
+            <tr>
+              <td>${item.date}</td>
+              <td>${item.date}</td>
+              <td>${item.desc}</td>
+              <td style="text-align: right; font-weight: 600;">£${item.amount.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+        rowsHtml += `
+          <tr id="settlement-credit-row" style="${isPaid ? '' : 'display: none;'} background: #f0fdf4; color: #166534; font-weight: 700;">
+            <td>09 Oct 2026</td>
+            <td>09 Oct 2026</td>
+            <td>Electronic Full Card Settlement (Online Portal)</td>
+            <td style="text-align: right; color: #166534;">-£${user.initialArrears.toFixed(2)}</td>
+          </tr>
+          <tr style="background: #f1f5f9; font-weight: 700;">
+            <td colspan="3">Total Outstanding Arrears:</td>
+            <td style="text-align: right; color: ${isPaid ? '#027a48' : 'var(--color-danger)'}; font-size: 1rem;" id="statement-total-amount">£${user.arrearsBalance.toFixed(2)}</td>
+          </tr>
+        `;
+        statementTbody.innerHTML = rowsHtml;
+      }
 
       // Cards
       const cardPtp = document.getElementById('action-card-ptp');
@@ -288,6 +326,8 @@
       const descPay = document.getElementById('desc-pay');
       const linkPay = document.getElementById('link-pay');
 
+      const pct = Math.min(100, Math.round((user.arrearsBalance / user.totalPrincipal) * 100));
+
       if (isPaid) {
         statAmount.textContent = '£0.00';
         statAmount.style.color = '#027a48';
@@ -307,9 +347,6 @@
         daysPill.style.background = '#dcfce7';
         daysPill.style.color = '#166534';
 
-        creditRow.style.display = 'table-row';
-        statementTotal.textContent = '£0.00';
-        statementTotal.style.color = '#027a48';
         paidBanner.style.display = 'block';
 
         // Disable Payment Plan Option
@@ -353,31 +390,28 @@
         badgePay.style.background = '#dcfce7';
         badgePay.style.color = '#166534';
         titlePay.textContent = '3. Overdue Balance Paid';
-        descPay.textContent = 'Your £1,240.00 arrears payment was successfully processed. No further action needed.';
+        descPay.textContent = `Your £${user.initialArrears.toFixed(2)} arrears payment was successfully processed. No further action needed.`;
         linkPay.textContent = '✓ Paid in Full';
         linkPay.style.color = '#027a48';
       } else {
-        statAmount.textContent = '£1,240.00';
+        statAmount.textContent = '£' + user.arrearsBalance.toFixed(2);
         statAmount.style.color = '#b42318';
-        ratioText.textContent = '23% of Loan Balance in Arrears';
+        ratioText.textContent = `${pct}% of Facility in Arrears`;
         ratioText.style.color = '#b42318';
 
-        barOverdue.style.width = '23%';
-        barRemaining.style.width = '77%';
+        barOverdue.style.width = pct + '%';
+        barRemaining.style.width = (100 - pct) + '%';
         barRemaining.style.background = '#cbd5e1';
-        legendArrears.textContent = '£1,240.00';
+        legendArrears.textContent = '£' + user.arrearsBalance.toFixed(2);
 
         statusBadge.textContent = 'Status: In Arrears';
         statusBadge.style.background = '#fee2e2';
         statusBadge.style.color = '#b91c1c';
 
-        daysPill.textContent = '● Overdue: 34 Days';
+        daysPill.textContent = `● Overdue: ${user.daysOverdue} Days`;
         daysPill.style.background = '#fee2e2';
         daysPill.style.color = '#b91c1c';
 
-        creditRow.style.display = 'none';
-        statementTotal.textContent = '£1,240.00';
-        statementTotal.style.color = '#b42318';
         paidBanner.style.display = 'none';
 
         // Reset Payment Plan Card
@@ -389,7 +423,7 @@
         badgePlan.style.background = '#e0e7ff';
         badgePlan.style.color = '#3730a3';
         titlePlan.textContent = '2. Set Up a Payment Plan';
-        descPlan.textContent = 'Spread your £1,240.00 arrears into equal, interest-paused monthly installments for up to 12 months.';
+        descPlan.textContent = `Spread your £${user.arrearsBalance.toFixed(2)} arrears into equal, interest-paused monthly installments for up to 12 months.`;
         linkPlan.textContent = 'View Eligible Monthly Plans →';
         linkPlan.style.color = '#2563eb';
         cardPlan.onclick = null;
@@ -403,7 +437,7 @@
         badgePtp.style.background = '#e0f2fe';
         badgePtp.style.color = '#0369a1';
         titlePtp.textContent = '1. Make a Promise to Pay (PTP)';
-        descPtp.textContent = 'Commit to pay the overdue arrears (£1,240.00) in full on a specific date within the next 30 days (e.g. your next payday).';
+        descPtp.textContent = `Commit to pay the overdue arrears (£${user.arrearsBalance.toFixed(2)}) in full on a specific date within the next 30 days (e.g. your next payday).`;
         linkPtp.textContent = 'Set PTP Date (Up to 30 Days) →';
         linkPtp.style.color = '#2563eb';
         cardPtp.onclick = null;
@@ -413,7 +447,7 @@
         badgePay.style.background = '#d1fae5';
         badgePay.style.color = '#065f46';
         titlePay.textContent = '3. Pay Overdue Balance Now';
-        descPay.textContent = 'Pay £1,240.00 immediately via secure embedded card checkout to instantly clear delinquency status.';
+        descPay.textContent = `Pay £${user.arrearsBalance.toFixed(2)} immediately via secure embedded card checkout to instantly clear delinquency status.`;
         linkPay.textContent = 'Launch Card Checkout →';
         linkPay.style.color = '#059669';
       }
@@ -424,7 +458,8 @@
 
       // Quick Pay Simulation Button
       document.getElementById('btn-quick-pay').addEventListener('click', function () {
-        window.LTBLedger.pay(1240.00, 'Debit Card (•••• 4012)');
+        const user = window.LTBLedger.getActiveUser();
+        window.LTBLedger.pay(user.arrearsBalance, 'Debit Card (•••• 4012)');
         renderSummaryState();
       });
 

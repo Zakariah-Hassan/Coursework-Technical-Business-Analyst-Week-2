@@ -64,15 +64,15 @@
         <p class="card-subtitle">Your credentials have been matched with active account records.</p>
       </div>
 
-      <div class="alert alert-info">
-        <strong>Matched Core Record:</strong> Account Reference <strong>LTB-8849-2104</strong> recognized. A 6-digit One-Time Passcode (OTP) has been dispatched via SMS to registered mobile ending in <strong>•••• 4921</strong>.
+      <div class="alert alert-info" id="verify-matched-banner">
+        <strong>Matched Core Record:</strong> Account Reference <strong id="verify-acc-ref">LTB-8849-2104</strong> recognized (<span id="verify-persona-label" style="font-weight:600;">Sarah M. Jenkins</span>). A 6-digit One-Time Passcode (OTP) has been dispatched via SMS to registered mobile ending in <strong id="verify-masked-phone">•••• 4921</strong>.
       </div>
 
       <form action="03-account-summary.html" method="get">
         <div class="form-group">
           <label class="form-label" for="dob">Date of Birth</label>
           <input class="form-control" type="date" id="dob" name="dob" value="1985-06-14" required>
-          <span class="form-hint">Matches primary borrower records on file.</span>
+          <span class="form-hint" id="dob-hint">Matches primary borrower records on file.</span>
         </div>
 
         <div class="form-group">
@@ -186,7 +186,26 @@
     </div>
   </footer>
 
-  <!-- 1-Minute Inactivity Session Manager -->
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
   <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.LTBLedger && window.LTBLedger.getActiveUser) {
+        const user = window.LTBLedger.getActiveUser();
+        if (user) {
+          const accEl = document.getElementById('verify-acc-ref');
+          const phoneEl = document.getElementById('verify-masked-phone');
+          const personaEl = document.getElementById('verify-persona-label');
+          const dobInput = document.getElementById('dob');
+
+          if (accEl) accEl.textContent = user.accountRef;
+          if (phoneEl) phoneEl.textContent = user.phoneMasked || '•••• 4921';
+          if (personaEl) personaEl.textContent = user.borrowerName + ' - ' + user.personaBadge;
+          if (dobInput && user.dob) dobInput.value = user.dob;
+        }
+      }
+    });
+  </script>
 </body>
 </html>

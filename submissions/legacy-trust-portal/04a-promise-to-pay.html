@@ -76,7 +76,7 @@
       <div class="stat-box" style="margin-bottom: 1.5rem;">
         <div>
           <div class="stat-label">Arrears Balance to be Settled</div>
-          <div class="stat-amount" style="font-size: 1.8rem; color: var(--color-primary);">£1,240.00</div>
+          <div class="stat-amount" id="ptp-arrears-amount" style="font-size: 1.8rem; color: var(--color-primary);">£1,240.00</div>
         </div>
         <div style="font-size: 0.9rem; color: var(--color-text-muted); text-align: right;">
           Policy Horizon: <strong>Maximum 30 days</strong><br>
@@ -114,7 +114,7 @@
         <div class="form-group" style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
           <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
             <input type="checkbox" name="ptpDeclaration" required style="margin-top: 0.25rem;">
-            <span style="font-size: 0.9rem; color: var(--color-text);">
+            <span style="font-size: 0.9rem; color: var(--color-text);" id="ptp-declaration-text">
               <strong>Legal Commitment Declaration:</strong> I confirm that I intend to pay the full arrears of £1,240.00 on or before the selected date. I understand that failing to make this payment will cancel the collection hold and may result in formal recovery escalation and adverse credit bureau reporting.
             </span>
           </label>
@@ -142,8 +142,15 @@
   <script src="session-timer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const state = window.LTBLedger.getState();
-      const isPaid = state.isPaid || state.arrearsBalance <= 0;
+      const user = window.LTBLedger.getActiveUser();
+      const isPaid = user.isPaid || user.arrearsBalance <= 0;
+
+      const amtEl = document.getElementById('ptp-arrears-amount');
+      const declEl = document.getElementById('ptp-declaration-text');
+      if (amtEl) amtEl.textContent = '£' + user.arrearsBalance.toFixed(2);
+      if (declEl) {
+        declEl.innerHTML = `<strong>Legal Commitment Declaration:</strong> I confirm that I intend to pay the full arrears of £${user.arrearsBalance.toFixed(2)} on or before the selected date. I understand that failing to make this payment will cancel the collection hold and may result in formal recovery escalation and adverse credit bureau reporting.`;
+      }
 
       if (isPaid) {
         document.getElementById('ptp-zero-banner').style.display = 'block';

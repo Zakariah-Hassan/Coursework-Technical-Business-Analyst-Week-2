@@ -141,7 +141,19 @@
     </div>
   </footer>
 
-  <!-- 1-Minute Inactivity Session Manager -->
+  <!-- State & Session Managers -->
+  <script src="ledger-store.js"></script>
   <script src="session-timer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.LTBLedger && window.LTBLedger.getActiveUser) {
+        const user = window.LTBLedger.getActiveUser();
+        const phoneInput = document.getElementById('phone');
+        if (user && phoneInput && user.phone) {
+          phoneInput.value = user.phone;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
